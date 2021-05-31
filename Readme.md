@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Tanja](https://up.htmlacademy.ru/react/7/user/1621659).
-* Наставник: `Неизвестно`.
+* Наставник: [Сергей Сергеев](https://htmlacademy.ru/profile/id1205257).
 
 ---
 
