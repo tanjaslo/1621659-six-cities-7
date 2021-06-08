@@ -1,16 +1,23 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
 function PlaceCard() {
-
   return (
     <article className="cities__place-card place-card">
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="/offer">
-          <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place" />
-        </a>
+        <Link to={AppRoute.ROOM}>
+          <img
+            className="place-card__image"
+            src="img/apartment-03.jpg"
+            width="260"
+            height="200"
+            alt="Place"
+          />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -32,7 +39,9 @@ function PlaceCard() {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/offer/:id">Nice, cozy, warm big bed apartment</a>
+          <Link to={AppRoute.ROOM}>
+                Nice, cozy, warm big bed apartment
+          </Link>
         </h2>
         <p className="place-card__type">Apartment</p>
       </div>
