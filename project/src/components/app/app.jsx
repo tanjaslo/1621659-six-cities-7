@@ -10,12 +10,12 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 import offersProp from '../../prop-types/offers.prop';
 import reviewsProp from '../../prop-types/reviews.prop';
 
-function App({placesCount, offers, reviews}) {
+function App({offers, reviews}) {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={AppRoute.MAIN} exact>
-          <MainPage placesCount={placesCount} offers={offers} />
+          <MainPage offers={offers} />
         </Route>
         <Route path={AppRoute.FAVORITES} exact>
           <FavoritesPage offers={offers} />
@@ -35,7 +35,6 @@ function App({placesCount, offers, reviews}) {
 }
 
 App.propTypes = {
-  placesCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(offersProp).isRequired,
   reviews: PropTypes.arrayOf(reviewsProp).isRequired,
 };
