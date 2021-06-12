@@ -101,7 +101,7 @@ const offers = [
         longitude: 4.895168,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Paris',
     },
     description:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
@@ -164,7 +164,7 @@ const offers = [
     },
     maxAdults: 2,
     previewImage: 'img/room.jpg',
-    price: 100,
+    price: 80,
     rating: 4.5,
     title: 'Cozy room at great location',
     type: 'private room',
