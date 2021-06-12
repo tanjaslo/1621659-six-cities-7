@@ -5,7 +5,7 @@ import PlaceCard from '../place-card/place-card';
 import {CardTypes} from '../../const';
 
 function FavoritesPlace({favoritesOffers, favoritesCity}) {
-  const offers = favoritesOffers.filter((item) => item.city.name === favoritesCity);
+  const offers = favoritesOffers.filter((offer) => offer.city.name === favoritesCity);
 
   return (
     <li className="favorites__locations-items">
