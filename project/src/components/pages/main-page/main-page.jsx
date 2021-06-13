@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import offersProp from '../../../prop-types/offers.prop';
 import Header from '../../header/header';
-import PlaceCard from '../../place-card/place-card';
+import PlacesList from '../../places-list/places-list';
 
-function MainPage({placesCount}){
+function MainPage({offers}){
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -49,7 +50,7 @@ function MainPage({placesCount}){
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{offers.length} {offers.length > 1 ? 'places' : 'place'} to stay in Amsterdam</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -65,9 +66,7 @@ function MainPage({placesCount}){
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {Array(placesCount).fill(null).map((id) => <PlaceCard key={id} />)}
-              </div>
+              <PlacesList offers={offers} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -80,7 +79,7 @@ function MainPage({placesCount}){
 }
 
 MainPage.propTypes = {
-  placesCount: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(offersProp).isRequired,
 };
 
 export default MainPage;
