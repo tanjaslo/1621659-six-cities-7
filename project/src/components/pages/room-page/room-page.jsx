@@ -5,6 +5,7 @@ import offersProp from '../../../prop-types/offers.prop';
 import reviewsProp from '../../../prop-types/reviews.prop';
 import PlaceCard from '../../place-card/place-card.jsx';
 import Header from '../../header/header';
+import Map from '../../map/map';
 import ReviewsList from '../../reviews-list/reviews-list';
 import ReviewForm from '../../review-form/review-form';
 import {CardTypes} from '../../../const';
@@ -112,7 +113,9 @@ function RoomPage({offers, reviews}) {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map offers={offers} />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
