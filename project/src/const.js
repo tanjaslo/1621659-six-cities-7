@@ -1,5 +1,3 @@
-// export const RATING_TITLES = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
-
 export const AppRoute = {
   FAVORITES: '/favorites',
   LOGIN: '/login',

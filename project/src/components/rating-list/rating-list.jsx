@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import RatingItem from '../rating-item/rating-item';
 import {Ratings} from '../../const';
 
 function RatingList({onChange}) {
