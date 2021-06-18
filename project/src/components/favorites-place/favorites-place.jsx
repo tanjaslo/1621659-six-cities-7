@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import offersProp from '../../prop-types/offers.prop';
+import offerProp from '../../prop-types/offer.prop';
 import PlaceCard from '../place-card/place-card';
 import {CardTypes} from '../../const';
 
@@ -29,7 +29,7 @@ function FavoritesPlace({favoritesOffers, favoritesCity}) {
 }
 
 FavoritesPlace.propTypes = {
-  favoritesOffers: PropTypes.arrayOf(offersProp).isRequired,
+  favoritesOffers: PropTypes.arrayOf(offerProp).isRequired,
   favoritesCity: PropTypes.string.isRequired,
 };
 

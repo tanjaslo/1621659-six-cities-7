@@ -1,8 +1,8 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import offersProp from '../../../prop-types/offers.prop';
-import reviewsProp from '../../../prop-types/reviews.prop';
+import offerProp from '../../../prop-types/offer.prop';
+import reviewProp from '../../../prop-types/review.prop';
 import PlaceCard from '../../place-card/place-card.jsx';
 import Header from '../../header/header';
 import Map from '../../map/map';
@@ -114,7 +114,7 @@ function RoomPage({offers, reviews}) {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers} />
+            <Map city={offers[0].city} offers={offers} activeCard={room}/>
           </section>
         </section>
         <div className="container">
@@ -139,8 +139,8 @@ function RoomPage({offers, reviews}) {
 }
 
 RoomPage.propTypes = {
-  offers: PropTypes.arrayOf(offersProp).isRequired,
-  reviews: PropTypes.arrayOf(reviewsProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
 export default RoomPage;

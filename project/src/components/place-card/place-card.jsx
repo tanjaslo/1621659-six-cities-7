@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import offersProp from '../../prop-types/offers.prop';
+import offerProp from '../../prop-types/offer.prop';
 import {getRating, uppercaseFirstLetter} from '../../utils';
 
 function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
@@ -59,7 +59,7 @@ function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
 }
 
 PlaceCard.propTypes = {
-  offer: offersProp,
+  offer: offerProp,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func,
   cardType: PropTypes.shape({

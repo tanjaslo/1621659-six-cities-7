@@ -1,11 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import offersProp from '../../../prop-types/offers.prop';
+import offerProp from '../../../prop-types/offer.prop';
 import Header from '../../header/header';
 import Map from '../../map/map';
 import PlacesList from '../../places-list/places-list';
 
 function MainPage({offers}){
+  const [activeCard, setActiveCard] = useState({});
+
+  const onCardHover = (id) => {
+    const currentCard = offers.find((offer) => offer.id === Number(id));
+    setActiveCard(currentCard);
+  };
+
   return (
     <div className="page page--gray page--main">
       <Header />
@@ -67,11 +74,14 @@ function MainPage({offers}){
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <PlacesList offers={offers} />
+              <PlacesList offers={offers}
+                onMouseEnter={onCardHover}
+                onMouseLeave={() => setActiveCard('')}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map offers={offers} />
+                <Map city={offers[0].city} offers={offers} activeCard={activeCard}/>
               </section>
             </div>
           </div>
@@ -82,7 +92,7 @@ function MainPage({offers}){
 }
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(offersProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
 export default MainPage;
