@@ -1,5 +1,5 @@
 import React from 'react';
-import reviewsProp from '../../prop-types/reviews.prop';
+import reviewProp from '../../prop-types/review.prop';
 import {getRating} from '../../utils';
 
 function Review({review}) {
@@ -43,7 +43,7 @@ function Review({review}) {
 }
 
 Review.propTypes = {
-  review: reviewsProp,
+  review: reviewProp,
 };
 
 export default Review;

@@ -7,8 +7,8 @@ import FavoritesPage from '../pages/favorites-page/favorites-page';
 import LoginPage from '../pages/login-page/login-page';
 import RoomPage from '../pages/room-page/room-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
-import offersProp from '../../prop-types/offers.prop';
-import reviewsProp from '../../prop-types/reviews.prop';
+import offerProp from '../../prop-types/offer.prop';
+import reviewProp from '../../prop-types/review.prop';
 
 function App({offers, reviews}) {
   return (
@@ -35,8 +35,8 @@ function App({offers, reviews}) {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(offersProp).isRequired,
-  reviews: PropTypes.arrayOf(reviewsProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
 export default App;

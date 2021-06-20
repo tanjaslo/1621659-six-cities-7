@@ -1,22 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import offersProp from '../../../prop-types/offers.prop';
-import reviewsProp from '../../../prop-types/reviews.prop';
-import PlaceCard from '../../place-card/place-card.jsx';
+import offerProp from '../../../prop-types/offer.prop';
+import reviewProp from '../../../prop-types/review.prop';
+import PlacesList from '../../places-list/places-list';
 import Header from '../../header/header';
 import Map from '../../map/map';
 import ReviewsList from '../../reviews-list/reviews-list';
 import ReviewForm from '../../review-form/review-form';
-import {CardTypes} from '../../../const';
 import {getRating, uppercaseFirstLetter} from '../../../utils';
 
 function RoomPage({offers, reviews}) {
   const {id} = useParams();
   const room = offers.find((offer) => offer.id === Number(id));
   const {bedrooms, goods, images, title, price, type, description, maxAdults, isPremium, isFavorite, rating, host} = room;
-  const placeRating = getRating(rating);
   const {avatarUrl, isPro, name} = host;
+
+  const placeRating = getRating(rating);
+  const nearOffers = offers.filter((item) => item !== room).slice(0, 3);
+
+  const [activeCard, setActiveCard] = useState(room);
+
+  const onCardHover = (cardId) => {
+    const currentCard = offers.find((offer) => offer.id === Number(cardId));
+    setActiveCard(currentCard);
+  };
 
   return (
     <div className="page">
@@ -114,23 +122,17 @@ function RoomPage({offers, reviews}) {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers} />
+            <Map city={offers[0].city} offers={offers} activeCard={activeCard}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {offers.slice(0, 3).map((offer) =>
-                (
-                  <PlaceCard
-                    key={offer.id}
-                    offer={offer}
-                    cardType={CardTypes['ROOM_PAGE']}
-                  />
-                ),
-              )}
-            </div>
+            <PlacesList
+              offers={nearOffers}
+              onMouseEnter={onCardHover}
+              onMouseLeave={() => setActiveCard(room)}
+            />
           </section>
         </div>
       </main>
@@ -139,8 +141,8 @@ function RoomPage({offers, reviews}) {
 }
 
 RoomPage.propTypes = {
-  offers: PropTypes.arrayOf(offersProp).isRequired,
-  reviews: PropTypes.arrayOf(reviewsProp).isRequired,
+  offers: PropTypes.arrayOf(offerProp).isRequired,
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
 export default RoomPage;
