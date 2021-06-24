@@ -5,43 +5,55 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 
+const defaultIcon = L.icon({
+  iconUrl: 'img/pin.svg',
+  iconSize: [27, 39],
+  iconAnchor: [15, 30],
+});
+
+const activeIcon = L.icon({
+  iconUrl: 'img/pin-active.svg',
+  iconSize: [27, 39],
+  iconAnchor: [15, 30],
+});
+
 function Map({city, offers, activeCard}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
+    const layerGroup = L.layerGroup();
+
     if (map) {
-      offers.forEach((offer) => {
-        const {latitude, longitude} = offer.location;
-        const {id} = offer;
-
-        const defaultIcon = L.icon({
-          iconUrl: 'img/pin.svg',
-          iconSize: [27, 39],
-          iconAnchor: [15, 30],
-        });
-
-        const activeIcon = L.icon({
-          iconUrl: 'img/pin-active.svg',
-          iconSize: [27, 39],
-          iconAnchor: [15, 30],
-        });
-
-        L.marker(
+      offers.forEach(({location: {latitude, longitude}, id}) => {
+        const marker = L.marker(
           {
             lat: latitude,
             lng: longitude,
           },
           {
             icon:
-              (id === activeCard.id)
-                ? activeIcon
-                : defaultIcon,
+            (id === activeCard.id)
+              ? activeIcon
+              : defaultIcon,
           },
-        )
-          .addTo(map);
+        );
+        layerGroup.addLayer(marker);
       });
+
+      layerGroup.addTo(map);
+
+      map.flyTo(
+        [offers[0].city.location.latitude, offers[0].city.location.longitude],
+        offers[0].city.location.zoom,
+      );
     }
+
+    return () => {
+      if (map) {
+        layerGroup.remove();
+      }
+    };
   }, [map, offers, activeCard]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
