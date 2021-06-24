@@ -2,14 +2,56 @@ const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 const offers = [
   {
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 48.864716,
+        longitude: 2.3,
+        zoom: 10,
+      },
+      name: 'Paris',
+    },
+    description:
+      'Big spasious flat is situated in the heart of the city centre within walking distance of museums, the main shopping area and night life. You will find plenty of cafés and restaurants in the area.',
+    goods: [
+      'Air conditioning',
+      'Wi-Fi',
+      'Towels',
+      'Heating',
+      'Cable TV',
+      'Fridge',
+    ],
+    host: {
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
+      id: 1,
+      isPro: true,
+      name: 'Corine',
+    },
+    id: 1,
+    images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/room.jpg'],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.73564787,
+      longitude: 2.34556,
+      zoom: 8,
+    },
+    maxAdults: 3,
+    previewImage: 'img/room.jpg',
+    price: 250,
+    rating: 3.6,
+    title: 'Big spasious flat',
+    type: 'apartment',
+  },
+  {
     bedrooms: 2,
     city: {
       location: {
-        latitude: 52.38333,
-        longitude: 4.9,
+        latitude: 48.864716,
+        longitude: 2.3,
         zoom: 10,
       },
-      name: 'Amsterdam',
+      name: 'Paris',
     },
     description:
       'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
@@ -23,11 +65,11 @@ const offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 1,
+      id: 2,
       isPro: true,
       name: 'Angelina',
     },
-    id: 1,
+    id: 2,
     images: [
       'img/apartment-01.jpg',
       'img/apartment-02.jpg',
@@ -36,8 +78,8 @@ const offers = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.858093,
+      longitude: 2.294694,
       zoom: 8,
     },
     maxAdults: 4,
@@ -73,14 +115,14 @@ const offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 2,
+      id: 3,
       isPro: false,
       name: 'Alex',
     },
-    id: 2,
+    id: 3,
     images: ['img/room.jpg', 'img/studio-01.jpg'],
-    isFavorite: true,
-    isPremium: false,
+    isFavorite: false,
+    isPremium: true,
     location: {
       latitude: 52.369553943508,
       longitude: 4.85309666406198,
@@ -108,11 +150,11 @@ const offers = [
     goods: ['Wi-Fi', 'Kitchen', 'Dishwasher', 'Cable TV', 'Fridge'],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 3,
+      id: 4,
       isPro: true,
       name: 'Emma',
     },
-    id: 3,
+    id: 4,
     images: ['img/apartment-01.jpg', 'img/room.jpg', 'img/studio-01.jpg'],
     isFavorite: true,
     isPremium: false,
@@ -149,11 +191,11 @@ const offers = [
     ],
     host: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 4,
+      id: 5,
       isPro: true,
       name: 'Stanislav',
     },
-    id: 4,
+    id: 5,
     images: ['img/apartment-01.jpg', 'img/room.jpg'],
     isFavorite: false,
     isPremium: false,
@@ -168,6 +210,48 @@ const offers = [
     rating: 4.5,
     title: 'Cozy room at great location',
     type: 'private room',
+  },
+  {
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 50.872986,
+        longitude: 4.3,
+        zoom: 12,
+      },
+      name: 'Brussels',
+    },
+    description:
+      'Big spasious flat is situated in the heart of the city centre within walking distance of museums, the main shopping area and night life. You will find plenty of cafés and restaurants in the area.',
+    goods: [
+      'Air conditioning',
+      'Wi-Fi',
+      'Towels',
+      'Heating',
+      'Cable TV',
+      'Fridge',
+    ],
+    host: {
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
+      id: 6,
+      isPro: true,
+      name: 'Corine',
+    },
+    id: 6,
+    images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/room.jpg'],
+    isFavorite: true,
+    isPremium: false,
+    location: {
+      latitude: 50.850453943508,
+      longitude: 4.348609333,
+      zoom: 8,
+    },
+    maxAdults: 5,
+    previewImage: 'img/apartment-01.jpg',
+    price: 350,
+    rating: 4,
+    title: 'Big spasious flat',
+    type: 'apartment',
   },
 ];
 

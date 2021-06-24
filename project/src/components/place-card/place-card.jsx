@@ -14,10 +14,11 @@ function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
     <article className={`${articleClassName} place-card`}
       onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
     >
-      {isPremium &&
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>}
+      {isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      )}
       <div className={`${imgWrapperClassName} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img

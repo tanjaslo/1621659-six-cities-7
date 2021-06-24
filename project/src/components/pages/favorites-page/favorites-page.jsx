@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import offerProp from '../../../prop-types/offer.prop';
 import {Link} from 'react-router-dom';
@@ -43,4 +44,9 @@ FavoritesPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
-export default FavoritesPage;
+const mapStateToProps = ({offers}) => ({
+  offers: offers,
+});
+
+export {FavoritesPage};
+export default connect(mapStateToProps, null)(FavoritesPage);

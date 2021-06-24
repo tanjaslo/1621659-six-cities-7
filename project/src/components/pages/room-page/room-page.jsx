@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {useParams} from 'react-router-dom';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import offerProp from '../../../prop-types/offer.prop';
 import reviewProp from '../../../prop-types/review.prop';
@@ -42,10 +43,11 @@ function RoomPage({offers, reviews}) {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium &&
+              {isPremium && (
                 <div className="property__mark">
                   <span>Premium</span>
-                </div>}
+                </div>
+              )}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{title}</h1>
                 <button className={`property__bookmark-button button${isFavorite ? ' property__bookmark-button--active' : ''}`} type="button">
@@ -101,10 +103,9 @@ function RoomPage({offers, reviews}) {
                   <span className="property__user-name">
                     {name}
                   </span>
-                  {isPro &&
-                    <span className="property__user-status">
-                      Pro
-                    </span>}
+                  {isPro && (
+                    <span className="property__user-status">Pro</span>
+                  )}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -145,4 +146,10 @@ RoomPage.propTypes = {
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
-export default RoomPage;
+const mapStateToProps = ({offers, reviews}) => ({
+  offers,
+  reviews,
+});
+
+export {RoomPage};
+export default connect(mapStateToProps)(RoomPage);
