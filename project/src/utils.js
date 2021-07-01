@@ -1,16 +1,26 @@
+import {SortTypes} from './const';
+
 const STARS_COUNT = 5;
 
-const getOffersByCity = (offers, activeCity) =>
+export const getOffersByCity = (offers, activeCity) =>
   offers.filter(({city}) => city.name  === activeCity);
 
-const getRating = (rating) =>
+export const getRating = (rating) =>
   `${((rating / STARS_COUNT) * 100)}%`;
 
-const uppercaseFirstLetter = (str) =>
-  str.charAt(0).toUpperCase() + str.slice(1);
-
-export {
-  getOffersByCity,
-  getRating,
-  uppercaseFirstLetter
+export const getSortedOffers = (sortType, offers) => {
+  switch (sortType) {
+    case SortTypes.PRICE_LOW:
+      return offers.slice().sort((a, b) => a.price - b.price);
+    case SortTypes.PRICE_HIGH:
+      return offers.slice().sort((a, b) => b.price - a.price);
+    case SortTypes.TOP_RATED:
+      return offers.slice().sort((a, b) => b.rating - a.rating);
+    case SortTypes.POPULAR:
+    default:
+      return offers;
+  }
 };
+
+export const uppercaseFirstLetter = (str) =>
+  str.charAt(0).toUpperCase() + str.slice(1);
