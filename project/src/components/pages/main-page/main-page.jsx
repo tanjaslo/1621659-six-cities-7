@@ -7,9 +7,12 @@ import MainEmpty from '../../main-empty/main-empty';
 import Map from '../../map/map';
 import CitiesList from '../../cities-list/cities-list';
 import PlacesList from '../../places-list/places-list';
+import SortList from '../../sort-list/sort-list';
+import {getSortedOffers} from '../../../utils';
 
-function MainPage({offers, activeCity}){
+function MainPage({offers, activeCity, sortType}){
   const [activeCard, setActiveCard] = useState({});
+  const sortedOffers = getSortedOffers(sortType, offers);
 
   const onCardHover = (id) => {
     const currentCard = offers.find((offer) => offer.id === Number(id));
@@ -35,24 +38,10 @@ function MainPage({offers, activeCity}){
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} {offers.length > 1 ? 'places' : 'place'} to stay in {activeCity}</b>
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex="0">
-                    Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                    <li className="places__option" tabIndex="0">Price: low to high</li>
-                    <li className="places__option" tabIndex="0">Price: high to low</li>
-                    <li className="places__option" tabIndex="0">Top rated first</li>
-                  </ul>
-                </form>
+                <SortList />
                 <PlacesList
                   isMainPage
-                  offers={offers}
+                  offers={sortedOffers}
                   onMouseEnter={onCardHover}
                   onMouseLeave={() => setActiveCard('')}
                 />
@@ -75,11 +64,13 @@ function MainPage({offers, activeCity}){
 MainPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   activeCity: PropTypes.string.isRequired,
+  sortType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
   offers: state.offers,
+  activeCity: state.activeCity,
+  sortType: state.sortType,
 });
 
 export {MainPage};
