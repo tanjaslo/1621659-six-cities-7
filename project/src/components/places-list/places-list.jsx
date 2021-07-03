@@ -8,7 +8,7 @@ function PlacesList({offers, onMouseEnter, onMouseLeave, isMainPage = true}) {
   return (
     <div className={isMainPage
       ? 'cities__places-list places__list tabs__content'
-      : 'near-places__list places__list'}
+      : ''}
     >
       {offers.map((offer) => (
         <PlaceCard

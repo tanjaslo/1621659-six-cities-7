@@ -1,10 +1,24 @@
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+export const DEFAULT_CITY = CITIES[0];
 
-export const AppRoute = {
+export const APIRoutes = {
+  OFFERS: '/hotels',
+  REVIEWS: '/comments',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};
+
+export const AppRoutes = {
   FAVORITES: '/favorites',
   LOGIN: '/login',
   MAIN: '/',
   ROOM: '/offer/:id',
+};
+
+export const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
 };
 
 export const CardTypes = {
