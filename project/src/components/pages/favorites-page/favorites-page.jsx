@@ -4,24 +4,40 @@ import PropTypes from 'prop-types';
 import offerProp from '../../../prop-types/offer.prop';
 import {Link} from 'react-router-dom';
 import FavoritesList from '../../favorites-list/favorites-list';
+import FavoritesEmpty from '../../favorites-empty/favorites-empty';
 import Header from '../../header/header';
 
 function FavoritesPage({offers}) {
   const favoritesOffers = offers.filter((offer) => offer.isFavorite);
   const cities = Array.from(new Set(offers.map((offer) => offer.city.name)));
   const favoritesCities = [...cities.values()];
+  const areFavoritesEmpty = favoritesOffers.length === 0;
 
   return (
     <div className="page">
       <Header />
-      <main className="page__main page__main--favorites">
+      <main className={`page__main page__main--favorites
+      ${areFavoritesEmpty && ('page__main--favorites-empty')}`}
+      >
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <FavoritesList
-              favoritesCities={favoritesCities}
-              favoritesOffers={favoritesOffers}
-            />
+          <section className={`favorites
+            ${areFavoritesEmpty && ('favorites--empty')}`}
+          >
+            {
+              areFavoritesEmpty ? (
+                <h1 className="visually-hidden">Favorites (empty)</h1>) :
+                (
+                  <h1 className="favorites__title">Saved listing</h1>
+                )
+            }
+            {
+              areFavoritesEmpty ? (
+                <FavoritesEmpty/>) : (
+                <FavoritesList
+                  favoritesCities={favoritesCities}
+                  favoritesOffers={favoritesOffers}
+                />)
+            }
           </section>
         </div>
       </main>

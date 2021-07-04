@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoutes} from '../../const';
+import browserHistory from '../../browser-history';
+import PrivateRoute from '../private-route/private-route';
 import MainPage from '../pages/main-page/main-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
 import LoginPage from '../pages/login-page/login-page';
@@ -16,10 +18,13 @@ function App({isDataLoaded}) {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoutes.MAIN} component={MainPage} />
-        <Route exact path={AppRoutes.FAVORITES} component={FavoritesPage} />
+        <PrivateRoute
+          exact path={AppRoutes.FAVORITES}
+          render={() => <FavoritesPage />}
+        />
         <Route exact path={AppRoutes.LOGIN} component={LoginPage} />
         <Route exact path={AppRoutes.ROOM} component={RoomPage} />
         <Route component={NotFoundPage} />
