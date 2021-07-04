@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoutes} from '../../const';
 
 function PageHeader() {
   return (
@@ -10,8 +10,8 @@ function PageHeader() {
           <div className="header__left">
             <NavLink
               className="header__logo-link"
-              to={AppRoute.MAIN}
-              isActive={(match, {pathname}) => !match ? false : pathname === AppRoute.MAIN}
+              to={AppRoutes.MAIN}
+              isActive={(match, {pathname}) => !match ? false : pathname === AppRoutes.MAIN}
               activeClassName="header__logo-link--active"
             >
               <img
@@ -28,8 +28,8 @@ function PageHeader() {
               <li className="header__nav-item user">
                 <NavLink
                   className="header__nav-link header__nav-link--profile"
-                  to={AppRoute.LOGIN}
-                  isActive={(match, {pathname}) => !match ? false : pathname === AppRoute.LOGIN}
+                  to={AppRoutes.LOGIN}
+                  isActive={(match, {pathname}) => !match ? false : pathname === AppRoutes.LOGIN}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                   <span className="header__login">Sign in</span>

@@ -8,7 +8,7 @@ import Map from '../../map/map';
 import CitiesList from '../../cities-list/cities-list';
 import PlacesList from '../../places-list/places-list';
 import SortList from '../../sort-list/sort-list';
-import {getSortedOffers} from '../../../utils';
+import {getSortedOffers, getOffersByCity} from '../../../utils';
 
 function MainPage({offers, activeCity, sortType}){
   const [activeCard, setActiveCard] = useState({});
@@ -43,7 +43,7 @@ function MainPage({offers, activeCity, sortType}){
                   isMainPage
                   offers={sortedOffers}
                   onMouseEnter={onCardHover}
-                  onMouseLeave={() => setActiveCard('')}
+                  onMouseLeave={() => setActiveCard({})}
                 />
               </section>
               <div className="cities__right-section">
@@ -68,7 +68,7 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  offers: getOffersByCity(state.offers, state.activeCity),
   activeCity: state.activeCity,
   sortType: state.sortType,
 });

@@ -1,23 +1,43 @@
-import offers from '../mocks/offers';
-import reviews from '../mocks/reviews';
-import {CITIES, SortTypes} from '../const';
+import {DEFAULT_CITY, SortTypes, AuthorizationStatus} from '../const';
 import {ActionType} from './action';
-import {getOffersByCity} from '../utils';
 
 const initialState = {
-  activeCity: CITIES[0],
-  offers: getOffersByCity(offers, CITIES[0]),
-  reviews,
+  activeCity: DEFAULT_CITY,
+  offers: [],
+  reviews: [],
   sortType: SortTypes.POPULAR,
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
+  isDataLoaded: false,
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case ActionType.LOAD_OFFERS:
+      return {
+        ...state,
+        offers: action.payload,
+        isDataLoaded: true,
+      };
+    case ActionType.LOAD_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
+        isDataLoaded: true,
+      };
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
+      };
+    case ActionType.LOGOUT:
+      return {
+        ...state,
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
+      };
     case ActionType.CHANGE_CITY:
       return {
         ...state,
         activeCity: action.payload,
-        offers: getOffersByCity(offers, action.payload),
       };
     case ActionType.CHANGE_SORT_TYPE:
       return {
