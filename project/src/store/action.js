@@ -3,7 +3,9 @@ export const ActionType = {
   CHANGE_SORT_TYPE: 'main/changeSortType',
   LOAD_OFFERS: 'offers/loadOffers',
   LOAD_REVIEWS: 'reviews/loadReviews',
-  REQUIRED_AUTHORIZATION: 'user/REQUIRED_AUTHORIZATION',
+  REDIRECT_TO_ROUTE: 'cities/redirectToRoute',
+  REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
+  LOAD_USER_DATA: 'user/loadUserData',
   LOGOUT: 'user/logout',
 };
 
@@ -24,9 +26,17 @@ export const ActionCreator = {
     type: ActionType.LOAD_REVIEWS,
     payload: reviews,
   }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
+  }),
+  loadUserData: (userData) => ({
+    type: ActionType.LOAD_USER_DATA,
+    payload: userData,
   }),
   logout: () => ({
     type: ActionType.LOGOUT,

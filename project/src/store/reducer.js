@@ -5,6 +5,7 @@ const initialState = {
   activeCity: DEFAULT_CITY,
   offers: [],
   reviews: [],
+  userData: {},
   sortType: SortTypes.POPULAR,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   isDataLoaded: false,
@@ -28,6 +29,11 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+    case ActionType.LOAD_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload,
       };
     case ActionType.LOGOUT:
       return {
