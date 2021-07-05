@@ -24,7 +24,9 @@ export const fetchReviews = (id) => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.LOGIN)
+    .then(({data}) => dispatch(ActionCreator.loadUserData(adaptUserToClient(data))))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .catch(() => {})
 );
 
 export const login = ({login: email, password}) =>

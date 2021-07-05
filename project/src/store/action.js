@@ -4,7 +4,7 @@ export const ActionType = {
   LOAD_OFFERS: 'offers/loadOffers',
   LOAD_REVIEWS: 'reviews/loadReviews',
   REDIRECT_TO_ROUTE: 'cities/redirectToRoute',
-  REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
+  REQUIRED_AUTHORIZATION: 'user/requireAuthorization',
   LOAD_USER_DATA: 'user/loadUserData',
   LOGOUT: 'user/logout',
 };

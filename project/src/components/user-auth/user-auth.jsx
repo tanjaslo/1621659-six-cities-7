@@ -4,14 +4,8 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../const';
 import {logout} from '../../store/api-actions';
-import {ActionCreator} from '../../store/action';
 
-function UserAuth({onClick, email, avatarUrl, loadUserData}) {
-  const handleClick = () => {
-    onClick(logout);
-    loadUserData({});
-  };
-
+function UserAuth({email, avatarUrl, handleLogoutClick}) {
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
@@ -20,7 +14,7 @@ function UserAuth({onClick, email, avatarUrl, loadUserData}) {
           to={AppRoutes.FAVORITES}
         >
           <div className="header__avatar-wrapper user__avatar-wrapper">
-            <img src={avatarUrl} alt="user" />
+            <img src={avatarUrl} alt={'user'} style={{borderRadius: '50%'}}/>
           </div>
           <span className="header__user-name user__name">{email}</span>
         </Link>
@@ -32,7 +26,7 @@ function UserAuth({onClick, email, avatarUrl, loadUserData}) {
         >
           <span
             className="header__signout"
-            onClick={handleClick}
+            onClick={handleLogoutClick}
           >
             Sign out
           </span>
@@ -43,10 +37,9 @@ function UserAuth({onClick, email, avatarUrl, loadUserData}) {
 }
 
 UserAuth.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  handleLogoutClick: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   avatarUrl: PropTypes.string.isRequired,
-  loadUserData: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({userData: {email, avatarUrl}}) => ({
@@ -55,8 +48,7 @@ const mapStateToProps = ({userData: {email, avatarUrl}}) => ({
 });
 
 const mapDispatchToProps = {
-  onClick: logout,
-  loadUserData: ActionCreator.loadUserData,
+  handleLogoutClick: logout,
 };
 
 export {UserAuth};
