@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,9 +10,9 @@ import Map from '../../map/map';
 import ReviewsList from '../../reviews-list/reviews-list';
 import ReviewForm from '../../review-form/review-form';
 import {getRating, uppercaseFirstLetter} from '../../../utils';
-import {fetchReviews} from '../../../store/api-actions';
+import {fetchReviews, fetchNearbyOffers} from '../../../store/api-actions';
 
-function RoomPage({offers, reviews, loadReviews}) {
+function RoomPage({offers, reviews, nearbyOffers, loadReviews, loadOffersNearby}) {
   const {id} = useParams();
   const room = offers.find((offer) => offer.id === Number(id));
 
@@ -20,18 +20,19 @@ function RoomPage({offers, reviews, loadReviews}) {
   const {avatarUrl, isPro, name} = host;
 
   const placeRating = getRating(rating);
-  const nearOffers = offers.filter((item) => item !== room).slice(0, 3);
+  // const nearOffers = nearbyOffers.filter((item) => item !== room).slice(0, 3);
 
-  const [, setActiveCard] = useState(room);
+  //const [, setActiveCard] = useState(room);
 
-  const onCardHover = (cardId) => {
+  /*const onCardHover = (cardId) => {
     const currentCard = offers.find((offer) => offer.id === Number(cardId));
     setActiveCard(currentCard);
-  };
+  }; */
 
   useEffect(() => {
     loadReviews(id);
-  }, [id, loadReviews]);
+    loadOffersNearby(id);
+  }, [id, loadReviews, loadOffersNearby]);
 
   return (
     <div className="page">
@@ -141,9 +142,11 @@ function RoomPage({offers, reviews, loadReviews}) {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <PlacesList
-                offers={nearOffers}
-                onMouseEnter={onCardHover}
-                onMouseLeave={() => setActiveCard(room)}
+                offers={nearbyOffers}
+                onMouseEnter={() => {}}
+                onMouseLeave={() => {}}
+                /* onMouseEnter={onCardHover}
+                onMouseLeave={() => setActiveCard(room)} */
               />
             </div>
           </section>
@@ -156,16 +159,20 @@ function RoomPage({offers, reviews, loadReviews}) {
 RoomPage.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
+  nearbyOffers: PropTypes.arrayOf(offerProp).isRequired,
   loadReviews: PropTypes.func.isRequired,
+  loadOffersNearby: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({offers, reviews}) => ({
+const mapStateToProps = ({offers, reviews, nearbyOffers}) => ({
   offers,
   reviews,
+  nearbyOffers,
 });
 
 const mapDispatchToProps = {
   loadReviews: fetchReviews,
+  loadOffersNearby: fetchNearbyOffers,
 };
 
 export {RoomPage};

@@ -22,6 +22,11 @@ export const fetchReviews = (id) => (dispatch, _getState, api) => (
     .then((reviews) => dispatch(ActionCreator.loadReviews(reviews)))
 );
 
+export const fetchNearbyOffers = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoutes.OFFERS}/${id}${APIRoutes.NEARBY_OFFERS}`)
+    .then(({data}) => dispatch(ActionCreator.loadNearbyOffers(data.map(adaptOfferToClient))))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.LOGIN)
     .then(({data}) => dispatch(ActionCreator.loadUserData(adaptUserToClient(data))))

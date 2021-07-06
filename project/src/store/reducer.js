@@ -5,6 +5,7 @@ const initialState = {
   activeCity: DEFAULT_CITY,
   offers: [],
   reviews: [],
+  nearbyOffers: [],
   userData: {},
   sortType: SortTypes.POPULAR,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
@@ -24,6 +25,11 @@ export const reducer = (state = initialState, action) => {
         ...state,
         reviews: action.payload,
         isDataLoaded: true,
+      };
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return {
+        ...state,
+        nearbyOffers: action.payload,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {

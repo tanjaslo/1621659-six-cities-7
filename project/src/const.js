@@ -6,6 +6,7 @@ export const APIRoutes = {
   REVIEWS: '/comments',
   LOGIN: '/login',
   LOGOUT: '/logout',
+  NEARBY_OFFERS: '/nearby',
 };
 
 export const AppRoutes = {
