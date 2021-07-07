@@ -2,12 +2,14 @@ export const ActionType = {
   CHANGE_CITY: 'cities/changeCity',
   CHANGE_SORT_TYPE: 'main/changeSortType',
   LOAD_OFFERS: 'data/loadOffers',
-  LOAD_REVIEWS: 'reviews/loadReviews',
+  LOAD_ROOM: 'data/loadRoom',
+  LOAD_REVIEWS: 'data/loadReviews',
   REDIRECT_TO_ROUTE: 'cities/redirectToRoute',
   REQUIRED_AUTHORIZATION: 'user/requireAuthorization',
   LOAD_USER_DATA: 'user/loadUserData',
-  LOAD_NEARBY_OFFERS: 'data/loadNearbyOffers',
+  LOAD_OFFERS_NEARBY: 'data/loadOffersNearby',
   LOGOUT: 'user/logout',
+  SET_IS_ROOM_DATA_LOADED: 'offers/setIsRoomDataLoaded',
 };
 
 export const ActionCreator = {
@@ -19,6 +21,10 @@ export const ActionCreator = {
     type: ActionType.CHANGE_SORT_TYPE,
     payload: sortType,
   }),
+  loadRoom: (room) => ({
+    type: ActionType.LOAD_ROOM,
+    payload: room,
+  }),
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers,
@@ -27,9 +33,9 @@ export const ActionCreator = {
     type: ActionType.LOAD_REVIEWS,
     payload: reviews,
   }),
-  loadNearbyOffers: (offers) => ({
-    type: ActionType.LOAD_NEARBY_OFFERS,
-    payload: offers,
+  loadOffersNearby: (offersNearby) => ({
+    type: ActionType.LOAD_OFFERS_NEARBY,
+    payload: offersNearby,
   }),
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
@@ -45,5 +51,9 @@ export const ActionCreator = {
   }),
   logout: () => ({
     type: ActionType.LOGOUT,
+  }),
+  setRoomLoadingStatus: (isLoaded) => ({
+    type: ActionType.SET_IS_ROOM_DATA_LOADED,
+    payload: isLoaded,
   }),
 };

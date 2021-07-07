@@ -6,33 +6,34 @@ import offerProp from '../../../prop-types/offer.prop';
 import reviewProp from '../../../prop-types/review.prop';
 import PlacesList from '../../places-list/places-list';
 import Header from '../../header/header';
+import LoadingScreen from '../../loading-screen/loading-screen';
 import Map from '../../map/map';
 import ReviewsList from '../../reviews-list/reviews-list';
 import ReviewForm from '../../review-form/review-form';
 import {getRating, uppercaseFirstLetter} from '../../../utils';
-import {fetchReviews, fetchNearbyOffers} from '../../../store/api-actions';
+import {fetchRoom, fetchReviews, fetchOffersNearby} from '../../../store/api-actions';
 
-function RoomPage({offers, reviews, nearbyOffers, loadReviews, loadOffersNearby}) {
+const MAX_NEARBY_OFFERS = 3;
+const MAX_ROOM_IMAGES = 6;
+
+function RoomPage({room, reviews, offersNearby, loadRoomData, isRoomDataLoaded}) {
   const {id} = useParams();
-  const room = offers.find((offer) => offer.id === Number(id));
+
+  useEffect(() => {
+    loadRoomData(id);
+  }, [id, loadRoomData]);
+
+  if (!isRoomDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   const {bedrooms, goods, images, title, price, type, description, maxAdults, isPremium, isFavorite, rating, host, city} = room;
   const {avatarUrl, isPro, name} = host;
 
   const placeRating = getRating(rating);
-  // const nearOffers = nearbyOffers.filter((item) => item !== room).slice(0, 3);
-
-  //const [, setActiveCard] = useState(room);
-
-  /*const onCardHover = (cardId) => {
-    const currentCard = offers.find((offer) => offer.id === Number(cardId));
-    setActiveCard(currentCard);
-  }; */
-
-  useEffect(() => {
-    loadReviews(id);
-    loadOffersNearby(id);
-  }, [id, loadReviews, loadOffersNearby]);
+  const nearOffers = offersNearby.filter((item) => item !== room).slice(0, MAX_NEARBY_OFFERS);
 
   return (
     <div className="page">
@@ -41,7 +42,7 @@ function RoomPage({offers, reviews, nearbyOffers, loadReviews, loadOffersNearby}
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((imageUrl, i) => (
+              {images.slice(0, MAX_ROOM_IMAGES).map((imageUrl, i) => (
                 <div className="property__image-wrapper" key={imageUrl + i.toString()}>
                   <img className="property__image" src={imageUrl} alt={uppercaseFirstLetter(type)} />
                 </div>
@@ -132,7 +133,7 @@ function RoomPage({offers, reviews, nearbyOffers, loadReviews, loadOffersNearby}
           <section className="property__map map">
             <Map
               city={city}
-              offers={[room, ...offers]}
+              offers={[room, ...offersNearby]}
               activeCard={room}
             />
           </section>
@@ -142,11 +143,9 @@ function RoomPage({offers, reviews, nearbyOffers, loadReviews, loadOffersNearby}
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               <PlacesList
-                offers={nearbyOffers}
+                offers={nearOffers}
                 onMouseEnter={() => {}}
                 onMouseLeave={() => {}}
-                /* onMouseEnter={onCardHover}
-                onMouseLeave={() => setActiveCard(room)} */
               />
             </div>
           </section>
@@ -157,23 +156,27 @@ function RoomPage({offers, reviews, nearbyOffers, loadReviews, loadOffersNearby}
 }
 
 RoomPage.propTypes = {
-  offers: PropTypes.arrayOf(offerProp).isRequired,
+  room: offerProp,
+  offersNearby: PropTypes.arrayOf(offerProp).isRequired,
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
-  nearbyOffers: PropTypes.arrayOf(offerProp).isRequired,
-  loadReviews: PropTypes.func.isRequired,
-  loadOffersNearby: PropTypes.func.isRequired,
+  loadRoomData: PropTypes.func.isRequired,
+  isRoomDataLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({offers, reviews, nearbyOffers}) => ({
-  offers,
-  reviews,
-  nearbyOffers,
+const mapStateToProps = (state) => ({
+  room: state.room,
+  offersNearby: state.offersNearby,
+  reviews: state.reviews,
+  isRoomDataLoaded: state.isRoomDataLoaded,
 });
 
-const mapDispatchToProps = {
-  loadReviews: fetchReviews,
-  loadOffersNearby: fetchNearbyOffers,
-};
+const mapDispatchToProps = (dispatch) => ({
+  loadRoomData(id) {
+    dispatch(fetchRoom(id));
+    dispatch(fetchOffersNearby(id));
+    dispatch(fetchReviews(id));
+  },
+});
 
 export {RoomPage};
 export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);

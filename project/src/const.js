@@ -6,7 +6,7 @@ export const APIRoutes = {
   REVIEWS: '/comments',
   LOGIN: '/login',
   LOGOUT: '/logout',
-  NEARBY_OFFERS: '/nearby',
+  OFFERS_NEARBY: '/nearby',
 };
 
 export const AppRoutes = {
@@ -14,6 +14,7 @@ export const AppRoutes = {
   LOGIN: '/login',
   MAIN: '/',
   ROOM: '/offer/:id',
+  NOT_FOUND: '/not-found',
 };
 
 export const AuthorizationStatus = {
