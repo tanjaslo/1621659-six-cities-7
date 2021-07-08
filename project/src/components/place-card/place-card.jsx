@@ -1,8 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import generatePath from 'react-router/modules/generatePath';
 import PropTypes from 'prop-types';
 import offerProp from '../../prop-types/offer.prop';
 import {getRating, uppercaseFirstLetter} from '../../utils';
+import {AppRoutes} from '../../const';
 
 function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
   const {id, title, previewImage, price, type, isFavorite, isPremium, rating} = offer;
@@ -20,7 +22,7 @@ function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
         </div>
       )}
       <div className={`${imgWrapperClassName} place-card__image-wrapper`}>
-        <Link to={`/offer/${id}`}>
+        <Link to={{pathname: generatePath(AppRoutes.ROOM, {id})}}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -49,7 +51,7 @@ function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>
+          <Link to={{pathname: generatePath(AppRoutes.ROOM, {id})}}>
             {title}
           </Link>
         </h2>

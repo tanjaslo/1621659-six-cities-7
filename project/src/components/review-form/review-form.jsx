@@ -1,14 +1,21 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {postReview} from '../../store/api-actions';
 import RatingList from '../rating-list/rating-list';
 
 const MIN_CHARS_COUNT = 50;
 
-function ReviewForm() {
+function ReviewForm({roomId, sendReview}) {
+  // const [review, setReview] = useState({rating: null, comment: ''});
   const [rating, setRating] = useState(null);
   const [review, setReview] = useState('');
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
+    sendReview({id: roomId, comment: review, rating: rating});
+    setRating(null);
+    setReview('');
   };
 
   return (
@@ -21,15 +28,13 @@ function ReviewForm() {
         htmlFor="review"
       >Your review
       </label>
-      <div className="reviews__rating-form form__rating">
-        <RatingList rating={rating} onChange={(evt) => setRating(evt.target.value)} />
-      </div>
+      <RatingList rating={rating} setRating={setRating} />
       <textarea
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value={review.comment}
+        value={review}
         onChange={(evt) => setReview(evt.target.value)}
       >
       </textarea>
@@ -48,4 +53,14 @@ function ReviewForm() {
   );
 }
 
-export default ReviewForm;
+ReviewForm.propTypes = {
+  roomId: PropTypes.number.isRequired,
+  sendReview: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = {
+  sendReview: postReview,
+};
+
+export {ReviewForm};
+export default connect(null, mapDispatchToProps)(ReviewForm);

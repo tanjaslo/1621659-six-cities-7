@@ -6,25 +6,34 @@ import {adaptOfferToClient,
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.OFFERS)
-    .then(({data}) => {
-      const offers = data.map((offer) => adaptOfferToClient(offer));
-      return offers;
-    })
-    .then((offers) => dispatch(ActionCreator.loadOffers(offers)))
+    .then(({data}) => dispatch(ActionCreator.loadOffers(data.map(adaptOfferToClient))))
 );
+
+export const fetchRoom = (id) => (dispatch, _getState, api) => {
+  dispatch(ActionCreator.setRoomLoadingStatus(false));
+  api.get(`${APIRoutes.OFFERS}/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadRoom(adaptOfferToClient(data))))
+    .then(() => dispatch(ActionCreator.setRoomLoadingStatus(true)))
+    .catch(() => {
+      dispatch(ActionCreator.redirectToRoute(AppRoutes.NOT_FOUND));
+    });
+};
 
 export const fetchReviews = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoutes.REVIEWS}/${id}`)
-    .then(({data}) => {
-      const reviews = data.map((review) => adaptReviewToClient(review));
-      return reviews;
-    })
-    .then((reviews) => dispatch(ActionCreator.loadReviews(reviews)))
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data.map(adaptReviewToClient))))
+);
+
+export const fetchOffersNearby = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoutes.OFFERS}/${id}${APIRoutes.OFFERS_NEARBY}`)
+    .then(({data}) => dispatch(ActionCreator.loadOffersNearby(data.map(adaptOfferToClient))))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoutes.LOGIN)
+    .then(({data}) => dispatch(ActionCreator.loadUserData(adaptUserToClient(data))))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .catch(() => {})
 );
 
 export const login = ({login: email, password}) =>
@@ -45,3 +54,14 @@ export const logout = () =>
       .then(() => dispatch(ActionCreator.logout()))
       .then(() => dispatch(ActionCreator.redirectToRoute(AppRoutes.MAIN)))
   );
+
+export const postReview = ({id, comment, rating}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoutes.REVIEWS}/${id}`,
+    {comment, rating},
+    {
+      headers: {
+        'x-token': localStorage.getItem('token'),
+      },
+    })
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data.map(adaptReviewToClient))))
+);
