@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Ratings} from '../../const';
 
-function RatingList({onChange}) {
+function RatingList({rating, setRating}) {
   return (
     <div className="reviews__rating-form form__rating">
       {Object.values(Ratings).map(({value, title}) => (
@@ -13,7 +13,8 @@ function RatingList({onChange}) {
             value={value}
             id={`${value}-stars`}
             type="radio"
-            onChange={onChange}
+            onChange={(evt) => setRating(Number(evt.target.value))}
+            checked={rating === value}
           />
           <label
             htmlFor={`${value}-stars`}
@@ -30,7 +31,8 @@ function RatingList({onChange}) {
 }
 
 RatingList.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  rating: PropTypes.number.isRequired,
+  setRating: PropTypes.func.isRequired,
 };
 
 export default RatingList;

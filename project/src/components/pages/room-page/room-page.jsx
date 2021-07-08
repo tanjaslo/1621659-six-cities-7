@@ -10,18 +10,19 @@ import LoadingScreen from '../../loading-screen/loading-screen';
 import Map from '../../map/map';
 import ReviewsList from '../../reviews-list/reviews-list';
 import ReviewForm from '../../review-form/review-form';
+import {AuthorizationStatus} from '../../../const';
 import {getRating, uppercaseFirstLetter} from '../../../utils';
 import {fetchRoom, fetchReviews, fetchOffersNearby} from '../../../store/api-actions';
 
 const MAX_NEARBY_OFFERS = 3;
 const MAX_ROOM_IMAGES = 6;
 
-function RoomPage({room, reviews, offersNearby, loadRoomData, isRoomDataLoaded}) {
+function RoomPage({room, reviews, offersNearby, loadRoomData, isRoomDataLoaded, authorizationStatus}) {
   const {id} = useParams();
 
   useEffect(() => {
     loadRoomData(id);
-  }, [id, loadRoomData]);
+  }, [id, isRoomDataLoaded, loadRoomData]);
 
   if (!isRoomDataLoaded) {
     return (
@@ -122,11 +123,9 @@ function RoomPage({room, reviews, offersNearby, loadRoomData, isRoomDataLoaded})
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot;
-                  <span className="reviews__amount">{reviews.length}</span>
-                </h2>
                 <ReviewsList reviews={reviews} />
-                <ReviewForm />
+                {authorizationStatus === AuthorizationStatus.AUTH && (
+                  <ReviewForm roomId={id} />)}
               </section>
             </div>
           </div>
@@ -161,6 +160,7 @@ RoomPage.propTypes = {
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
   loadRoomData: PropTypes.func.isRequired,
   isRoomDataLoaded: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -168,6 +168,7 @@ const mapStateToProps = (state) => ({
   offersNearby: state.offersNearby,
   reviews: state.reviews,
   isRoomDataLoaded: state.isRoomDataLoaded,
+  authorizationStatus: state.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -54,3 +54,14 @@ export const logout = () =>
       .then(() => dispatch(ActionCreator.logout()))
       .then(() => dispatch(ActionCreator.redirectToRoute(AppRoutes.MAIN)))
   );
+
+export const postReview = ({id, comment, rating}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoutes.REVIEWS}/${id}`,
+    {comment, rating},
+    {
+      headers: {
+        'x-token': localStorage.getItem('token'),
+      },
+    })
+    .then(({data}) => dispatch(ActionCreator.loadReviews(data.map(adaptReviewToClient))))
+);
