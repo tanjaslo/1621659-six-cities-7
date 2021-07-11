@@ -31,7 +31,7 @@ function RatingList({rating, setRating}) {
 }
 
 RatingList.propTypes = {
-  rating: PropTypes.number.isRequired,
+  rating: PropTypes.number,
   setRating: PropTypes.func.isRequired,
 };
 
