@@ -1,11 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../const';
 import {logout} from '../../store/api-actions';
+import {getuserData} from '../../store/userData/selectors';
 
-function UserAuth({email, avatarUrl, handleLogoutClick}) {
+function UserAuth() {
+  const dispatch = useDispatch();
+  const user = useSelector(getuserData);
+
+  const {email, avatarUrl} = user;
+
+  const handleLogoutClick = () => {
+    dispatch(logout());
+  };
+
   return (
     <ul className="header__nav-list">
       <li className="header__nav-item user">
@@ -36,20 +45,4 @@ function UserAuth({email, avatarUrl, handleLogoutClick}) {
   );
 }
 
-UserAuth.propTypes = {
-  handleLogoutClick: PropTypes.func.isRequired,
-  email: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = ({userData: {email, avatarUrl}}) => ({
-  email,
-  avatarUrl,
-});
-
-const mapDispatchToProps = {
-  handleLogoutClick: logout,
-};
-
-export {UserAuth};
-export default connect(mapStateToProps, mapDispatchToProps)(UserAuth);
+export default UserAuth;

@@ -2,9 +2,6 @@ import {SortTypes} from './const';
 
 const STARS_COUNT = 5;
 
-export const getOffersByCity = (offers, activeCity) =>
-  offers.filter(({city}) => city.name  === activeCity);
-
 export const getRating = (rating) =>
   `${((rating / STARS_COUNT) * 100)}%`;
 

@@ -1,7 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
+import {getActiveCity} from '../../store/ui/selectors';
 
-function MainEmpty({activeCity}) {
+function MainEmpty() {
+  const activeCity = useSelector(getActiveCity);
+
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">
@@ -14,9 +17,5 @@ function MainEmpty({activeCity}) {
     </div>
   );
 }
-
-MainEmpty.propTypes = {
-  activeCity: PropTypes.string.isRequired,
-};
 
 export default MainEmpty;

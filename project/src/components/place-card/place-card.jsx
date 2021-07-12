@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 import generatePath from 'react-router/modules/generatePath';
 import PropTypes from 'prop-types';
@@ -75,4 +75,4 @@ PlaceCard.propTypes = {
   }).isRequired,
 };
 
-export default PlaceCard;
+export default memo(PlaceCard);
