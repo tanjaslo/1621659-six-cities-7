@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getSortType} from '../../store/ui/selectors';
-import {changeSortType} from '../../store/action';
+import {changeSortType} from '../../store/actions';
 import {SortTypes} from '../../const';
 import SortItem from '../sort-item/sort-item';
 

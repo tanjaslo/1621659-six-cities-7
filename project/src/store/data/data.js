@@ -6,7 +6,7 @@ import {
   loadReviews,
   loadOffersNearby
   //setRoomLoadingStatus
-} from '../action';
+} from '../actions';
 
 const initialState = {
   offers: [],

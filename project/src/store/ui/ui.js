@@ -1,7 +1,7 @@
 import {
   changeCity,
   changeSortType
-} from '../action';
+} from '../actions';
 import {createReducer} from '@reduxjs/toolkit';
 import {DEFAULT_CITY, SortTypes} from '../../const';
 

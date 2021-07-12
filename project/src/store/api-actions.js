@@ -6,7 +6,7 @@ import {loadOffers,
   requireAuthorization,
   logout as userLogout,
   //setRoomLoadingStatus,
-  setUserData} from './action';
+  setUserData} from './actions';
 import {AuthorizationStatus, APIRoutes, AppRoutes} from '../const';
 import {adaptOfferToClient,
   adaptReviewToClient,

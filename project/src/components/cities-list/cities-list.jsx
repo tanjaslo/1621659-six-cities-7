@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {CITIES} from '../../const';
 import City from '../city/city';
 import {getActiveCity} from '../../store/ui/selectors';
-import {changeCity} from '../../store/action';
+import {changeCity} from '../../store/actions';
 
 function CitiesList() {
   const activeCity = useSelector(getActiveCity);
