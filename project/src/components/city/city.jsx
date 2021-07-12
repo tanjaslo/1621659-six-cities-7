@@ -1,20 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function City({city, isActive, onChangeCity}) {
-
-  const handleCityClick = (evt) => {
-    evt.preventDefault();
-    onChangeCity(city);
-  };
-
+function City({city, isActive, onClick}) {
   return (
     <li className="locations__item">
       <a href={city.name}
         className={`locations__item-link tabs__item ${isActive && (
           'tabs__item--active'
         )}`}
-        onClick={handleCityClick}
+        onClick={onClick}
       >
         <span>{city}</span>
       </a>
@@ -25,7 +19,7 @@ function City({city, isActive, onChangeCity}) {
 City.propTypes = {
   city: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
-  onChangeCity: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default City;

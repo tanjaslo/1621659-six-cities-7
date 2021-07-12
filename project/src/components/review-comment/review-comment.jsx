@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 function ReviewComment({comment, setComment}) {
@@ -20,4 +20,4 @@ ReviewComment.propTypes = {
   setComment: PropTypes.func.isRequired,
 };
 
-export default ReviewComment;
+export default memo(ReviewComment);

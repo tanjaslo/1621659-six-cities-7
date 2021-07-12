@@ -1,20 +1,27 @@
 import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-import offerProp from '../../../prop-types/offer.prop';
-import reviewProp from '../../../prop-types/review.prop';
+import {useDispatch, useSelector} from 'react-redux';
 import Header from '../../header/header';
 import LoadingScreen from '../../loading-screen/loading-screen';
 import Property from '../../property/property';
 import {fetchRoom, fetchReviews, fetchOffersNearby} from '../../../store/api-actions';
+import {getOffersNearby, getReviews, getRoom, getRoomLoadStatus} from '../../../store/data/selectors';
 
-function RoomPage({room, reviews, offersNearby, loadRoomData, isRoomDataLoaded}) {
-  const {id} = useParams();
+function RoomPage() {
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const id = +params.id;
+  const room = useSelector(getRoom);
+  const reviews = useSelector(getReviews);
+  const offersNearby = useSelector(getOffersNearby);
+  const isRoomDataLoaded = useSelector(getRoomLoadStatus);
 
   useEffect(() => {
-    loadRoomData(id);
-  }, [id, isRoomDataLoaded, loadRoomData]);
+    dispatch(fetchRoom(id));
+    dispatch(fetchReviews(id));
+    dispatch(fetchOffersNearby(id));
+  }, [id, dispatch]);
 
   if (!isRoomDataLoaded) {
     return (
@@ -36,28 +43,4 @@ function RoomPage({room, reviews, offersNearby, loadRoomData, isRoomDataLoaded})
   );
 }
 
-RoomPage.propTypes = {
-  room: offerProp,
-  offersNearby: PropTypes.arrayOf(offerProp).isRequired,
-  reviews: PropTypes.arrayOf(reviewProp).isRequired,
-  loadRoomData: PropTypes.func.isRequired,
-  isRoomDataLoaded: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  room: state.room,
-  offersNearby: state.offersNearby,
-  reviews: state.reviews,
-  isRoomDataLoaded: state.isRoomDataLoaded,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  loadRoomData(id) {
-    dispatch(fetchRoom(id));
-    dispatch(fetchOffersNearby(id));
-    dispatch(fetchReviews(id));
-  },
-});
-
-export {RoomPage};
-export default connect(mapStateToProps, mapDispatchToProps)(RoomPage);
+export default RoomPage;

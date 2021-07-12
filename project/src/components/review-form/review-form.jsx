@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {postReview} from '../../store/api-actions';
 import RatingList from '../rating-list/rating-list';
 import ReviewComment from '../review-comment/review-comment';
@@ -8,7 +8,9 @@ import ReviewComment from '../review-comment/review-comment';
 const MIN_CHARS_COUNT = 50;
 const MAX_CHARS_COUNT = 300;
 
-function ReviewForm({roomId, sendReview}) {
+function ReviewForm({roomId}) {
+  const dispatch = useDispatch();
+
   // const [review, setReview] = useState({rating: null, comment: ''});
   const [rating, setRating] = useState(null);
   const [comment, setComment] = useState('');
@@ -18,7 +20,7 @@ function ReviewForm({roomId, sendReview}) {
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    sendReview({id: roomId, comment: comment, rating: rating});
+    dispatch(postReview(({id: roomId, comment: comment, rating: rating})));
     setRating(null);
     setComment('');
   };
@@ -55,12 +57,6 @@ ReviewForm.propTypes = {
   roomId: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number]),
-  sendReview: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = {
-  sendReview: postReview,
-};
-
-export {ReviewForm};
-export default connect(null, mapDispatchToProps)(ReviewForm);
+export default ReviewForm;

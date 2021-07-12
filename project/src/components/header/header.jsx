@@ -1,12 +1,14 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {AppRoutes, AuthorizationStatus} from '../../const';
 import UserAuth from '../user-auth/user-auth';
 import UserNoAuth from '../user-no-auth/user-no-auth';
+import {getAuthorizationStatus} from '../../store/userData/selectors';
 
-function Header({authorizationStatus}) {
+function Header() {
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
   return (
     <header className="header">
       <div className="container">
@@ -36,13 +38,4 @@ function Header({authorizationStatus}) {
   );
 }
 
-Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-});
-
-export {Header};
-export default connect(mapStateToProps)(Header);
+export default Header;

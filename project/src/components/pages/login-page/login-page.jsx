@@ -1,21 +1,23 @@
 import React, {useRef} from 'react';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../../store/api-actions';
 import {AppRoutes} from '../../../const';
 import Header from '../../header/header';
+import {getActiveCity} from '../../../store/ui/selectors';
 
-function LoginPage({activeCity, onSubmit}) {
+function LoginPage() {
+  const dispatch = useDispatch();
   const loginRef = useRef();
   const passwordRef = useRef();
+  const activeCity = useSelector(getActiveCity);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onSubmit({
+    dispatch(login({
       login: loginRef.current.value,
       password: passwordRef.current.value,
-    });
+    }));
   };
 
   return (
@@ -74,20 +76,4 @@ function LoginPage({activeCity, onSubmit}) {
   );
 }
 
-LoginPage.propTypes = {
-  activeCity: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  activeCity: state.activeCity,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  },
-});
-
-export {LoginPage};
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default LoginPage;

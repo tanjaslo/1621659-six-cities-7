@@ -1,19 +1,23 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-import offerProp from '../../prop-types/offer.prop';
-import reviewProp from '../../prop-types/review.prop';
+import {useSelector} from 'react-redux';
 import PlacesList from '../places-list/places-list';
 import Map from '../map/map';
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
 import {AuthorizationStatus} from '../../const';
 import {getRating, uppercaseFirstLetter} from '../../utils';
+import {getRoom, getReviews, getOffersNearby} from '../../store/data/selectors';
+import {getAuthorizationStatus} from '../../store/userData/selectors';
 
 const MAX_ROOM_IMAGES = 6;
 const MAX_NEARBY_OFFERS = 3;
 
-function Property({room, reviews, offersNearby, authorizationStatus}) {
+function Property() {
+  const room = useSelector(getRoom);
+  const reviews = useSelector(getReviews);
+  const offersNearby = useSelector(getOffersNearby);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
   const {id, bedrooms, goods, images, title, price, type, description, maxAdults, isPremium, isFavorite, rating, host, city} = room;
   const {avatarUrl, isPro, name} = host;
 
@@ -135,19 +139,4 @@ function Property({room, reviews, offersNearby, authorizationStatus}) {
   );
 }
 
-Property.propTypes = {
-  room: offerProp,
-  offersNearby: PropTypes.arrayOf(offerProp).isRequired,
-  reviews: PropTypes.arrayOf(reviewProp).isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  room: state.room,
-  offersNearby: state.offersNearby,
-  reviews: state.reviews,
-  authorizationStatus: state.authorizationStatus,
-});
-
-export {Property};
-export default connect(mapStateToProps)(Property);
+export default Property;

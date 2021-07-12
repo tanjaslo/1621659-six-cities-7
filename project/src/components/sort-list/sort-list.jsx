@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../store/action';
+import {useDispatch, useSelector} from 'react-redux';
+import {getSortType} from '../../store/ui/selectors';
+import {changeSortType} from '../../store/action';
 import {SortTypes} from '../../const';
 import SortItem from '../sort-item/sort-item';
 
-function SortList({sortType, onChangeSort}) {
+function SortList() {
+  const dispatch = useDispatch();
+  const sortType = useSelector(getSortType);
+
   const [isSortListOpen, setIsSortListOpen] = useState(false);
 
   const handleSortClick = () => {
@@ -13,14 +16,19 @@ function SortList({sortType, onChangeSort}) {
   };
 
   const handleSortChange = (type) => {
-    onChangeSort(type);
-    setIsSortListOpen(false);
+    dispatch(changeSortType(type));
+    // setIsSortListOpen(false);
+    handleSortClick();
   };
 
   return (
     <form className='places__sorting' action='#' method='get'>
       <span className='places__sorting-caption'>Sort by </span>
-      <span className='places__sorting-type' tabIndex='0' onClick={handleSortClick}>
+      <span
+        className='places__sorting-type'
+        tabIndex='0'
+        onClick={handleSortClick}
+      >
         {sortType}
         <svg className='places__sorting-arrow' width='7' height='4'>
           <use xlinkHref='#icon-arrow-select' />
@@ -42,20 +50,4 @@ function SortList({sortType, onChangeSort}) {
   );
 }
 
-SortList.propTypes = {
-  sortType: PropTypes.string.isRequired,
-  onChangeSort: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  sortType: state.sortType,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onChangeSort(sortType) {
-    dispatch(ActionCreator.changeSortType(sortType));
-  },
-});
-
-export {SortList};
-export default connect(mapStateToProps, mapDispatchToProps)(SortList);
+export default SortList;

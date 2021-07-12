@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import {AppRoutes} from '../../const';
 import browserHistory from '../../browser-history';
@@ -11,8 +10,11 @@ import LoginPage from '../pages/login-page/login-page';
 import RoomPage from '../pages/room-page/room-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import LoadingScreen from '../loading-screen/loading-screen';
+import {getDataLoadStatus} from '../../store/data/selectors';
 
-function App({isDataLoaded}) {
+function App() {
+  const isDataLoaded = useSelector(getDataLoadStatus);
+
   if (!isDataLoaded) {
     return <LoadingScreen />;
   }
@@ -33,15 +35,4 @@ function App({isDataLoaded}) {
   );
 }
 
-App.propTypes = {
-  // authorizationStatus: PropTypes.string.isRequired,
-  isDataLoaded: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  // authorizationStatus: state.authorizationStatus,
-  isDataLoaded: state.isDataLoaded,
-});
-
-export {App};
-export default connect(mapStateToProps)(App);
+export default App;
