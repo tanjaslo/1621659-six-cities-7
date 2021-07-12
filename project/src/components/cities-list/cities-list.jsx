@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {CITIES} from '../../const';
 import City from '../city/city';
@@ -22,4 +22,4 @@ function CitiesList() {
   );
 }
 
-export default CitiesList;
+export default memo(CitiesList);

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getSortType} from '../../store/ui/selectors';
 import {changeSortType} from '../../store/actions';
@@ -50,4 +50,4 @@ function SortList() {
   );
 }
 
-export default SortList;
+export default memo(SortList);

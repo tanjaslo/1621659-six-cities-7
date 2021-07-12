@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch} from 'react-redux';
 import {postReview} from '../../store/api-actions';
@@ -40,7 +40,7 @@ function ReviewForm({roomId}) {
       <ReviewComment comment={comment} setComment={setComment} />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{MIN_CHARS_COUNT} characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
@@ -59,4 +59,4 @@ ReviewForm.propTypes = {
     PropTypes.number]),
 };
 
-export default ReviewForm;
+export default memo(ReviewForm);
