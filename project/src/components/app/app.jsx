@@ -10,10 +10,10 @@ import LoginPage from '../pages/login-page/login-page';
 import RoomPage from '../pages/room-page/room-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {getDataLoadStatus} from '../../store/data/selectors';
+import {getDataLoadingStatus} from '../../store/data/selectors';
 
 function App() {
-  const isDataLoaded = useSelector(getDataLoadStatus);
+  const isDataLoaded = useSelector(getDataLoadingStatus);
 
   if (!isDataLoaded) {
     return <LoadingScreen />;

@@ -7,6 +7,7 @@ export const APIRoutes = {
   LOGIN: '/login',
   LOGOUT: '/logout',
   OFFERS_NEARBY: '/nearby',
+  FAVORITES: '/favorite',
 };
 
 export const AppRoutes = {
@@ -49,6 +50,27 @@ export const CardTypes = {
     imgHeight: '200',
   },
 };
+
+export const FavoritesButtonTypes = {
+  CARD: {
+    buttonClassName: 'place-card',
+    imgWidth: '18',
+    imgHeight: '19',
+  },
+  ROOM_PAGE: {
+    buttonClassName: 'property',
+    imgWidth: '31',
+    imgHeight: '33',
+  },
+};
+
+export const Types = {
+  MAIN_PAGE: 'MAIN_PAGE',
+  FAVORITES_PAGE: 'FAVORITES_PAGE',
+  ROOM_PAGE: 'ROOM_PAGE',
+  CARD: 'CARD',
+};
+
 
 export const Ratings = {
   PERFECT: {

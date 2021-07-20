@@ -3,11 +3,13 @@ import {createSelector} from 'reselect';
 import {getActiveCity} from '../ui/selectors';
 
 export const getOffers = (state) => state[NameSpace.DATA].offers;
-export const getRoom = (state) => state[NameSpace.DATA].room;
+export const getCurrentOffer = (state) => state[NameSpace.DATA].currentOffer;
 export const getReviews = (state) => state[NameSpace.DATA].reviews;
 export const getOffersNearby = (state) => state[NameSpace.DATA].offersNearby;
-export const getDataLoadStatus = (state) => state[NameSpace.DATA].isDataLoaded;
-export const getRoomLoadStatus = (state) => state[NameSpace.DATA].isRoomDataLoaded;
+export const getFavoritesOffers = (state) => state[NameSpace.DATA].favoritesOffers;
+export const getDataLoadingStatus = (state) => state[NameSpace.DATA].isDataLoaded;
+export const getFavoritesLoadingStatus = (state) => state[NameSpace.DATA].areFavoritesLoaded;
+export const getOfferLoadingStatus = (state) => state[NameSpace.DATA].isOfferDataLoaded;
 
 export const getCurrentOffers = createSelector(
   [getOffers, getActiveCity],

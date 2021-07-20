@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {memo, useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../../prop-types/offer.prop';
 import L from 'leaflet';
@@ -72,4 +72,4 @@ Map.propTypes = {
   offers: PropTypes.arrayOf(offerProp).isRequired,
 };
 
-export default Map;
+export default memo(Map);
