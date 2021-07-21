@@ -1,20 +1,27 @@
 import {createReducer} from '@reduxjs/toolkit';
-
 import {
   loadOffers,
-  loadRoom,
+  loadOffer,
   loadReviews,
-  loadOffersNearby
-  //setRoomLoadingStatus
+  loadOffersNearby,
+  loadFavoritesOffers,
+  setFavoritesLoadingStatus,
+  setOfferLoadingStatus,
+  updateOffer
 } from '../actions';
+import {updateFavoritesOffers, updateOfferIsFavorite, updateOffers} from '../../utils';
+
+export const REMOVE_FAVORITES_COUNT = 1;
 
 const initialState = {
   offers: [],
-  room: {},
+  currentOffer: {},
   reviews: [],
   offersNearby: [],
+  favoritesOffers: [],
   isDataLoaded: false,
-  isRoomDataLoaded: false,
+  isOfferDataLoaded: false,
+  areFavoritesLoaded: false,
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -23,19 +30,32 @@ const data = createReducer(initialState, (builder) => {
       state.isDataLoaded = true;
       state.offers = action.payload;
     })
-    .addCase(loadRoom, (state, action) => {
-      state.isRoomDataLoaded = true;
-      state.room = action.payload;
+    .addCase(loadOffer, (state, action) => {
+      state.isOfferDataLoaded = true;
+      state.currentOffer = action.payload;
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
     })
     .addCase(loadOffersNearby, (state, action) => {
       state.offersNearby = action.payload;
+    })
+    .addCase(loadFavoritesOffers, (state, action) => {
+      state.favoritesOffers = action.payload;
+      state.areFavoritesLoaded = true;
+    })
+    .addCase(setFavoritesLoadingStatus, (state, action) => {
+      state.areFavoritesLoaded = action.payload;
+    })
+    .addCase(setOfferLoadingStatus, (state, action) => {
+      state.isOfferDataLoaded = action.payload;
+    })
+    .addCase(updateOffer, (state, action) => {
+      state.currentOffer = updateOfferIsFavorite(state.currentOffer, action.payload);
+      state.offers = updateOffers(state.offers, action.payload);
+      state.favoritesOffers = updateFavoritesOffers(state.favoritesOffers, action.payload);
+      state.offersNearby = updateOffers(state.offersNearby, action.payload);
     });
-/*     .addCase(setRoomLoadingStatus, (state, action) => {
-      state.isRoomDataLoaded = action.payload;
-    }); */
 });
 
 export {data};

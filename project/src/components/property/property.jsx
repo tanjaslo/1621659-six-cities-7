@@ -1,28 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import offerProp from '../../prop-types/offer.prop';
+import reviewProp from '../../prop-types/review.prop';
 import {useSelector} from 'react-redux';
+import FavoritesButton from '../favorites-button/favorites-button';
 import PlacesList from '../places-list/places-list';
 import Map from '../map/map';
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
-import {AuthorizationStatus} from '../../const';
+import {AuthorizationStatus, Types} from '../../const';
 import {getRating, uppercaseFirstLetter} from '../../utils';
-import {getRoom, getReviews, getOffersNearby} from '../../store/data/selectors';
 import {getAuthorizationStatus} from '../../store/userData/selectors';
 
 const MAX_ROOM_IMAGES = 6;
 const MAX_NEARBY_OFFERS = 3;
 
-function Property() {
-  const room = useSelector(getRoom);
-  const reviews = useSelector(getReviews);
-  const offersNearby = useSelector(getOffersNearby);
-  const authorizationStatus = useSelector(getAuthorizationStatus);
-
-  const {id, bedrooms, goods, images, title, price, type, description, maxAdults, isPremium, isFavorite, rating, host, city} = room;
+function Property({offer, reviews, offersNearby}) {
+  const {id, bedrooms, goods, images, title, price, type, description, maxAdults, isPremium, isFavorite, rating, host, city} = offer;
   const {avatarUrl, isPro, name} = host;
 
   const placeRating = getRating(rating);
-  const nearOffers = offersNearby.filter((item) => item !== room).slice(0, MAX_NEARBY_OFFERS);
+  const nearOffers = offersNearby.filter((item) => item !== offer).slice(0, MAX_NEARBY_OFFERS);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   return (
     <>
@@ -45,12 +44,11 @@ function Property() {
             )}
             <div className="property__name-wrapper">
               <h1 className="property__name">{title}</h1>
-              <button className={`property__bookmark-button button${isFavorite ? ' property__bookmark-button--active' : ''}`} type="button">
-                <svg className="property__bookmark-icon" style={{width: '31', height: '33'}}>
-                  <use xlinkHref="#icon-bookmark"></use>
-                </svg>
-                <span className="visually-hidden">To bookmarks</span>
-              </button>
+              <FavoritesButton
+                id={id}
+                buttonType={Types.ROOM_PAGE}
+                isFavorite={isFavorite}
+              />
             </div>
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
@@ -111,15 +109,15 @@ function Property() {
             <section className="property__reviews reviews">
               <ReviewsList reviews={reviews} />
               {authorizationStatus === AuthorizationStatus.AUTH && (
-                <ReviewForm roomId={id} />)}
+                <ReviewForm id={id} />)}
             </section>
           </div>
         </div>
         <section className="property__map map">
           <Map
             city={city}
-            offers={[room, ...offersNearby]}
-            activeCard={room}
+            offers={[offer, ...offersNearby]}
+            activeCard={offer}
           />
         </section>
       </section>
@@ -138,5 +136,11 @@ function Property() {
     </>
   );
 }
+
+Property.propTypes = {
+  offer: offerProp,
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
+  offersNearby: PropTypes.arrayOf(offerProp).isRequired,
+};
 
 export default Property;

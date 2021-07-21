@@ -6,8 +6,8 @@ import {getActiveCity} from '../../store/ui/selectors';
 import {changeCity} from '../../store/actions';
 
 function CitiesList() {
-  const activeCity = useSelector(getActiveCity);
   const dispatch = useDispatch();
+  const activeCity = useSelector(getActiveCity);
 
   return (
     <ul className="locations__list tabs__list">

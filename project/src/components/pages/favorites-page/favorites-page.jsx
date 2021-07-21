@@ -1,46 +1,41 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import PropTypes from 'prop-types';
-import offerProp from '../../../prop-types/offer.prop';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import FavoritesList from '../../favorites-list/favorites-list';
+import {fetchFavoritesOffers} from '../../../store/api-actions';
+import Favorites from '../../favorites/favorites';
 import FavoritesEmpty from '../../favorites-empty/favorites-empty';
 import Header from '../../header/header';
+import LoadingScreen from '../../loading-screen/loading-screen';
+import {getFavoritesOffers, getFavoritesLoadingStatus} from '../../../store/data/selectors';
 
-function FavoritesPage({offers}) {
-  const favoritesOffers = offers.filter((offer) => offer.isFavorite);
-  const cities = Array.from(new Set(offers.map((offer) => offer.city.name)));
+function FavoritesPage() {
+  const dispatch = useDispatch();
+  const favoritesOffers = useSelector(getFavoritesOffers);
+  const areFavoritesLoaded = useSelector(getFavoritesLoadingStatus);
+
+  const cities = Array.from(new Set(favoritesOffers.map((item) => item.city.name)));
   const favoritesCities = [...cities.values()];
-  const areFavoritesEmpty = favoritesOffers.length === 0;
+
+  useEffect(() => {
+    dispatch(fetchFavoritesOffers());
+  }, [dispatch]);
+
+  if (!areFavoritesLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <div className="page">
       <Header />
-      <main className={`page__main page__main--favorites
-      ${areFavoritesEmpty && ('page__main--favorites-empty')}`}
-      >
-        <div className="page__favorites-container container">
-          <section className={`favorites
-            ${areFavoritesEmpty && ('favorites--empty')}`}
-          >
-            {
-              areFavoritesEmpty ? (
-                <h1 className="visually-hidden">Favorites (empty)</h1>) :
-                (
-                  <h1 className="favorites__title">Saved listing</h1>
-                )
-            }
-            {
-              areFavoritesEmpty ? (
-                <FavoritesEmpty/>) : (
-                <FavoritesList
-                  favoritesCities={favoritesCities}
-                  favoritesOffers={favoritesOffers}
-                />)
-            }
-          </section>
-        </div>
-      </main>
+      {favoritesOffers.length !== 0 ? (
+        <Favorites
+          favoritesOffers={favoritesOffers}
+          favoritesCities={favoritesCities}
+        />) : (
+        <FavoritesEmpty />
+      )}
       <footer className="footer container">
         <Link to="/">
           <img
@@ -56,13 +51,4 @@ function FavoritesPage({offers}) {
   );
 }
 
-FavoritesPage.propTypes = {
-  offers: PropTypes.arrayOf(offerProp).isRequired,
-};
-
-const mapStateToProps = ({offers}) => ({
-  offers: offers,
-});
-
-export {FavoritesPage};
-export default connect(mapStateToProps, null)(FavoritesPage);
+export default FavoritesPage;

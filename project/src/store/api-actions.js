@@ -1,12 +1,16 @@
 import {loadOffers,
-  loadRoom,
+  loadOffer,
   loadReviews,
   loadOffersNearby,
+  loadFavoritesOffers,
   redirectToRoute,
   requireAuthorization,
   logout as userLogout,
-  //setRoomLoadingStatus,
-  setUserData} from './actions';
+  setOfferLoadingStatus,
+  setUserData,
+  updateOffer,
+  setFavoritesLoadingStatus} from './actions';
+import {NameSpace} from './root-reducer';
 import {AuthorizationStatus, APIRoutes, AppRoutes} from '../const';
 import {adaptOfferToClient,
   adaptReviewToClient,
@@ -17,14 +21,12 @@ export const fetchOffers = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient))))
 );
 
-export const fetchRoom = (id) => (dispatch, _getState, api) => {
-  // dispatch(setRoomLoadingStatus(false));
+export const fetchOffer = (id) => (dispatch, _getState, api) => {
+  dispatch(setOfferLoadingStatus(false));
   api.get(`${APIRoutes.OFFERS}/${id}`)
-    .then(({data}) => dispatch(loadRoom(adaptOfferToClient(data))))
-    //.then(() => dispatch(setRoomLoadingStatus(true)))
-    .catch(() => {
-      dispatch(redirectToRoute(AppRoutes.NOT_FOUND));
-    });
+    .then(({data}) => dispatch(loadOffer(adaptOfferToClient(data))))
+    .then(() => dispatch(setOfferLoadingStatus(true)))
+    .catch(() => dispatch(redirectToRoute(AppRoutes.NOT_FOUND)));
 };
 
 export const fetchReviews = (id) => (dispatch, _getState, api) => (
@@ -73,3 +75,23 @@ export const postReview = ({id, comment, rating}) => (dispatch, _getState, api) 
     })
     .then(({data}) => dispatch(loadReviews(data.map(adaptReviewToClient))))
 );
+
+export const fetchFavoritesOffers = () => (dispatch, _getState, api) => {
+  dispatch(setFavoritesLoadingStatus(false));
+  api.get(APIRoutes.FAVORITES)
+    .then(({data}) => dispatch(loadFavoritesOffers(data.map(adaptOfferToClient))))
+    .then(() => dispatch(setFavoritesLoadingStatus(true)))
+    .catch(() => dispatch(loadFavoritesOffers([])));
+};
+
+export const setFavorites = ({id, status}) => (dispatch, getState, api) => {
+  const auth = getState()[NameSpace.USER].authorizationStatus;
+
+  if (auth !== AuthorizationStatus.AUTH) {
+    dispatch(redirectToRoute(AppRoutes.LOGIN));
+  } else {
+    api.post(`${APIRoutes.FAVORITES}/${id}/${status}`)
+      .then(({data}) => dispatch(updateOffer(adaptOfferToClient(data))))
+      .catch(() => {});
+  }
+};

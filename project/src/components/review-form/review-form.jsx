@@ -8,7 +8,7 @@ import ReviewComment from '../review-comment/review-comment';
 const MIN_CHARS_COUNT = 50;
 const MAX_CHARS_COUNT = 300;
 
-function ReviewForm({roomId}) {
+function ReviewForm({id}) {
   const dispatch = useDispatch();
 
   // const [review, setReview] = useState({rating: null, comment: ''});
@@ -20,7 +20,7 @@ function ReviewForm({roomId}) {
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(postReview(({id: roomId, comment: comment, rating: rating})));
+    dispatch(postReview(({id: id, comment: comment, rating: rating})));
     setRating(null);
     setComment('');
   };
@@ -54,9 +54,7 @@ function ReviewForm({roomId}) {
 }
 
 ReviewForm.propTypes = {
-  roomId: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number]),
+  id: PropTypes.number,
 };
 
 export default memo(ReviewForm);
