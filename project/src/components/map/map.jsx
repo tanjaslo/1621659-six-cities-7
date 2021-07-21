@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import offerProp from '../../prop-types/offer.prop';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 
 const defaultIcon = L.icon({
   iconUrl: 'img/pin.svg',

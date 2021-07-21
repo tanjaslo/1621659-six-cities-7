@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import {AppRoutes, AuthorizationStatus} from '../../const';
 import UserAuth from '../user-auth/user-auth';
 import UserNoAuth from '../user-no-auth/user-no-auth';
-import {getAuthorizationStatus} from '../../store/userData/selectors';
+import {getAuthorizationStatus} from '../../store/user-data/selectors';
 
 function Header() {
   const authorizationStatus = useSelector(getAuthorizationStatus);

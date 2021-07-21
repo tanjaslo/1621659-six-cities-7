@@ -10,7 +10,7 @@ import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
 import {AuthorizationStatus, Types} from '../../const';
 import {getRating, uppercaseFirstLetter} from '../../utils';
-import {getAuthorizationStatus} from '../../store/userData/selectors';
+import {getAuthorizationStatus} from '../../store/user-data/selectors';
 
 const MAX_ROOM_IMAGES = 6;
 const MAX_NEARBY_OFFERS = 3;
