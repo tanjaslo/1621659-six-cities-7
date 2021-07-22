@@ -176,7 +176,7 @@ describe('Actions', () => {
   it('action creator for changing sort type returns correct action', () => {
     const expectedAction = {
       type: ActionType.CHANGE_SORT_TYPE,
-      payload: 'high',
+      payload: 'low',
     };
 
     expect(changeSortType('low')).toEqual(expectedAction);
