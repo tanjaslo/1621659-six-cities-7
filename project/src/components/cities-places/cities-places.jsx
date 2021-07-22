@@ -6,12 +6,12 @@ import Map from '../map/map';
 import PlacesList from '../places-list/places-list';
 import SortList from '../sort-list/sort-list';
 import {getSortedOffers} from '../../utils';
-import {getActiveCity, getSortType} from '../../store/ui/selectors';
+import {getActiveCity, getActiveSortType} from '../../store/ui/selectors';
 
 function CitiesPlaces({currentOffers}) {
-  const sortType = useSelector(getSortType);
+  const activeSortType = useSelector(getActiveSortType);
   const activeCity = useSelector(getActiveCity);
-  const sortedOffers = getSortedOffers(sortType, currentOffers);
+  const sortedOffers = getSortedOffers(activeSortType, currentOffers);
 
   const [activeCard, setActiveCard] = useState({});
 
@@ -29,7 +29,7 @@ function CitiesPlaces({currentOffers}) {
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{currentOffers.length} {currentOffers.length > 1 ? 'places' : 'place'} to stay in {activeCity}</b>
         <SortList
-          sortType={sortType}
+          activeSortType={activeSortType}
         />
         <PlacesList
           isMainPage

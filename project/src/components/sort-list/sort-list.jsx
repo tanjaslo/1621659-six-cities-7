@@ -1,13 +1,13 @@
 import React, {memo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getSortType} from '../../store/ui/selectors';
+import {getActiveSortType} from '../../store/ui/selectors';
 import {changeSortType} from '../../store/actions';
 import {SortTypes} from '../../const';
 import SortItem from '../sort-item/sort-item';
 
 function SortList() {
   const dispatch = useDispatch();
-  const sortType = useSelector(getSortType);
+  const activeSortType = useSelector(getActiveSortType);
 
   const [isSortListOpen, setIsSortListOpen] = useState(false);
 
@@ -29,7 +29,7 @@ function SortList() {
         tabIndex='0'
         onClick={handleSortClick}
       >
-        {sortType}
+        {activeSortType}
         <svg className='places__sorting-arrow' width='7' height='4'>
           <use xlinkHref='#icon-arrow-select' />
         </svg>
@@ -40,8 +40,8 @@ function SortList() {
         {Object.values(SortTypes).map((sort) => (
           <SortItem
             key={sort}
-            isActive={sortType === sort}
-            sortType={sort}
+            isActive={activeSortType === sort}
+            activeSortType={sort}
             onChangeSort={handleSortChange}
           />
         ))}
