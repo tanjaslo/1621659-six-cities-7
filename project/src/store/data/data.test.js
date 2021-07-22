@@ -304,7 +304,7 @@ describe('Reducer: data', () => {
         id: 3,
         isFavorite: false,
       },
-  ];
+    ];
 
     const updatedFavoritesOffers = [
       {
@@ -335,6 +335,7 @@ describe('Reducer: data', () => {
         isFavorite: true,
       },
     ];
+
     const updateOfferAction = {
       type: ActionType.UPDATE_OFFER,
       payload: favoriteOffer,

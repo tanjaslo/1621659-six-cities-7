@@ -13,8 +13,8 @@ describe('Reducer: ui', () => {
 
   it('should replace current city with change city', () => {
     const state = {
-        activeCity: DEFAULT_CITY,
-        activeSortType: SortTypes.POPULAR,
+      activeCity: DEFAULT_CITY,
+      activeSortType: SortTypes.POPULAR,
     };
 
     expect(ui(state, changeCity('Amsterdam')))
@@ -26,8 +26,8 @@ describe('Reducer: ui', () => {
 
   it('should change sort type to a given value', () => {
     const state = {
-        activeCity: 'Amsterdam',
-        activeSortType: SortTypes.POPULAR,
+      activeCity: 'Amsterdam',
+      activeSortType: SortTypes.POPULAR,
     };
 
     expect(ui(state, changeSortType(SortTypes.PRICE_LOW)))
