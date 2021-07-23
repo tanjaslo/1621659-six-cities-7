@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {data} from './data/data';
 import {ui} from './ui/ui';
-import {userData} from './userData/userData';
+import {userData} from './user-data/user-data';
 
 export const NameSpace = {
   DATA: 'DATA',

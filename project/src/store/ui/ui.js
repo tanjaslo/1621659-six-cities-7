@@ -7,7 +7,7 @@ import {DEFAULT_CITY, SortTypes} from '../../const';
 
 const initialState = {
   activeCity: DEFAULT_CITY,
-  sortType: SortTypes.POPULAR,
+  activeSortType: SortTypes.POPULAR,
 };
 
 const ui = createReducer(initialState, (builder) => {
@@ -16,7 +16,7 @@ const ui = createReducer(initialState, (builder) => {
       state.activeCity = action.payload;
     })
     .addCase(changeSortType, (state, action) => {
-      state.sortType = action.payload;
+      state.activeSortType = action.payload;
     });
 });
 

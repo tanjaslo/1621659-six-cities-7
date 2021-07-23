@@ -3,7 +3,7 @@ import {Route, Redirect} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import PropTypes from 'prop-types';
 import {AuthorizationStatus, AppRoutes} from '../../const';
-import {getAuthorizationStatus} from '../../store/userData/selectors';
+import {getAuthorizationStatus} from '../../store/user-data/selectors';
 
 function PrivateRoute({path, exact, render}) {
   const authorizationStatus = useSelector(getAuthorizationStatus);

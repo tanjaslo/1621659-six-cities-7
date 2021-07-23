@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function SortItem({sortType, isActive, onChangeSort}) {
+function SortItem({activeSortType, isActive, onChangeSort}) {
 
   const handleSortClick = () => {
-    onChangeSort(sortType);
+    onChangeSort(activeSortType);
   };
 
   return (
@@ -12,13 +12,13 @@ function SortItem({sortType, isActive, onChangeSort}) {
       tabIndex='0'
       onClick={handleSortClick}
     >
-      {sortType}
+      {activeSortType}
     </li>
   );
 }
 
 SortItem.propTypes = {
-  sortType: PropTypes.string.isRequired,
+  activeSortType: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   onChangeSort: PropTypes.func.isRequired,
 };
