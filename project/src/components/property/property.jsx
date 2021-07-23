@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../../prop-types/offer.prop';
-import reviewProp from '../../prop-types/review.prop';
 import {useSelector} from 'react-redux';
 import FavoritesButton from '../favorites-button/favorites-button';
 import PlacesList from '../places-list/places-list';
@@ -15,7 +14,7 @@ import {getAuthorizationStatus} from '../../store/user-data/selectors';
 const MAX_ROOM_IMAGES = 6;
 const MAX_NEARBY_OFFERS = 3;
 
-function Property({offer, reviews, offersNearby}) {
+function Property({offer, offersNearby}) {
   const {id, bedrooms, goods, images, title, price, type, description, maxAdults, isPremium, isFavorite, rating, host, city} = offer;
   const {avatarUrl, isPro, name} = host;
 
@@ -107,7 +106,7 @@ function Property({offer, reviews, offersNearby}) {
               </div>
             </div>
             <section className="property__reviews reviews">
-              <ReviewsList reviews={reviews} />
+              <ReviewsList />
               {authorizationStatus === AuthorizationStatus.AUTH && (
                 <ReviewForm id={id} />)}
             </section>
@@ -139,7 +138,6 @@ function Property({offer, reviews, offersNearby}) {
 
 Property.propTypes = {
   offer: offerProp,
-  reviews: PropTypes.arrayOf(reviewProp).isRequired,
   offersNearby: PropTypes.arrayOf(offerProp).isRequired,
 };
 

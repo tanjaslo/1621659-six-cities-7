@@ -12,7 +12,7 @@ function FavoritesList({favoritesOffers, favoritesCities}) {
           favoritesOffers={favoritesOffers}
           favoritesCity={city}
         />
-      ))};
+      ))}
     </ul>
   );
 }

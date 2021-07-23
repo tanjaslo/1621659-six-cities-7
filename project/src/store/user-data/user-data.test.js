@@ -44,9 +44,9 @@ describe('Reducer: userData', () => {
     };
 
     expect(userData(state, setUserDataAction))
-    .toEqual({
-      authorizationStatus: AuthorizationStatus.AUTH,
-      userData: userData,
-    });
+      .toEqual({
+        authorizationStatus: AuthorizationStatus.AUTH,
+        userData: userData,
+      });
   });
 });
