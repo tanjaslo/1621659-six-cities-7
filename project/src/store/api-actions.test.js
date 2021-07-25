@@ -120,7 +120,7 @@ describe('Async operations', () => {
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.REQUIRED_AUTHORIZATION,
+          type: ActionType.REQUIRE_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
         });
       });
@@ -306,7 +306,7 @@ describe('Async operations', () => {
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: ActionType.REQUIRED_AUTHORIZATION,
+          type: ActionType.REQUIRE_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH,
         });
 

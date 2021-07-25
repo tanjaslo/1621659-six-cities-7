@@ -3,11 +3,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../const';
 import {logout} from '../../store/api-actions';
-import {getuserData} from '../../store/user-data/selectors';
+import {getUserData} from '../../store/user-data/selectors';
 
 function UserAuth() {
   const dispatch = useDispatch();
-  const user = useSelector(getuserData);
+  const user = useSelector(getUserData);
 
   const {email, avatarUrl} = user;
 

@@ -202,7 +202,7 @@ describe('Actions', () => {
 
   it('action creator for require authorization returns correct action', () => {
     const expectedAction = {
-      type: ActionType.REQUIRED_AUTHORIZATION,
+      type: ActionType.REQUIRE_AUTHORIZATION,
       payload: 'AUTH',
     };
 

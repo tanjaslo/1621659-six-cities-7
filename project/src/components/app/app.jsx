@@ -1,37 +1,34 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
-import {AppRoutes} from '../../const';
-import browserHistory from '../../browser-history';
+import {Switch, Route} from 'react-router-dom';
+import {AppRoutes, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../pages/main-page/main-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
 import LoginPage from '../pages/login-page/login-page';
 import RoomPage from '../pages/room-page/room-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
-import LoadingScreen from '../loading-screen/loading-screen';
-import {getDataLoadingStatus} from '../../store/data/selectors';
 
 function App() {
-  const isDataLoaded = useSelector(getDataLoadingStatus);
-
-  if (!isDataLoaded) {
-    return <LoadingScreen />;
-  }
-
   return (
-    <BrowserRouter history={browserHistory}>
-      <Switch>
-        <Route exact path={AppRoutes.MAIN} component={MainPage} />
-        <PrivateRoute
-          exact path={AppRoutes.FAVORITES}
-          render={() => <FavoritesPage />}
-        />
-        <Route exact path={AppRoutes.LOGIN} component={LoginPage} />
-        <Route exact path={AppRoutes.ROOM} component={RoomPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </BrowserRouter>
+    <Switch>
+      <Route exact path={AppRoutes.MAIN} component={MainPage} />
+      <PrivateRoute
+        exact path={AppRoutes.FAVORITES}
+        status={AuthorizationStatus.AUTH}
+        redirect={AppRoutes.LOGIN}
+        render={() => <FavoritesPage />}
+      />
+      <Route exact path={AppRoutes.LOGIN} component={LoginPage} />
+      <PrivateRoute
+        exact
+        path={AppRoutes.LOGIN}
+        status={AuthorizationStatus.NO_AUTH}
+        redirect={AppRoutes.MAIN}
+        render={() => <LoginPage />}
+      />
+      <Route exact path={AppRoutes.ROOM} component={RoomPage} />
+      <Route component={NotFoundPage} />
+    </Switch>
   );
 }
 
