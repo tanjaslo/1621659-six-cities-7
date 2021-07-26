@@ -11,8 +11,8 @@ function CitiesList() {
 
   return (
     <ul className="locations__list tabs__list">
-      {CITIES.map((city) => (
-        <City key={city}
+      {CITIES.map((city, index) => (
+        <City key={city + String(index)}
           city={city}
           isActive={activeCity === city}
           onClick={() => dispatch(changeCity(city))}

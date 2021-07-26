@@ -8,6 +8,7 @@ const HttpCode = {
 };
 
 const token = localStorage.getItem('token') ?? '';
+const getToken = () => localStorage.getItem('token') ?? '';
 
 export const createAPI = (onUnauthorized) => {
   const api = axios.create({
@@ -23,13 +24,19 @@ export const createAPI = (onUnauthorized) => {
   const onFail = (err) => {
     const {response} = err;
 
-    if (response.status === HttpCode.UNAUTHORIZED) {
+    if (response.status === HttpCode.UNAUTHORIZED && !token) {
       onUnauthorized();
     }
     throw err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
+
+  api.interceptors.request.use((config) => {
+    const currentToken = getToken();
+    config.headers['x-token'] = currentToken;
+    return config;
+  });
 
   return api;
 };
