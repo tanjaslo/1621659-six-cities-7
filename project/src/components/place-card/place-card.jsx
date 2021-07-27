@@ -25,7 +25,7 @@ function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
         </div>
       )}
       <div className={`${imgWrapperClassName} place-card__image-wrapper`}>
-        <Link to={{pathname: generatePath(AppRoutes.ROOM, {id})/* , state: id  */}}>
+        <Link to={{pathname: generatePath(AppRoutes.ROOM, {id})}}>
           <img
             className="place-card__image"
             src={previewImage}

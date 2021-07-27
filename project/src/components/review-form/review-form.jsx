@@ -11,7 +11,6 @@ const MAX_CHARS_COUNT = 300;
 function ReviewForm({id}) {
   const dispatch = useDispatch();
 
-  // const [review, setReview] = useState({rating: null, comment: ''});
   const [rating, setRating] = useState(null);
   const [comment, setComment] = useState('');
 

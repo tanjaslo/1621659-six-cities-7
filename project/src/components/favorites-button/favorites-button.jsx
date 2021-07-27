@@ -10,8 +10,6 @@ function FavoritesButton ({id, buttonType, isFavorite}) {
 
   const handleFavoriteClick = () => {
     dispatch(setFavorites({id: id, status: Number(!isFavorite)}));
-    //dispatch(setFavorites({id: id, status: +!isFavorite}));
-    //dispatch(setFavorites({id: id, status: isFavorite ? 0 : 1}));
   };
 
   return (

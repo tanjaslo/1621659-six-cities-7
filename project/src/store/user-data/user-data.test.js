@@ -13,23 +13,23 @@ describe('Reducer: userData', () => {
 
   it('should update authorizationStatus by require authorization', () => {
     const state = {authorizationStatus: AuthorizationStatus.NO_AUTH};
-    const requiredAuthorizationAction = {
-      type: ActionType.REQUIRED_AUTHORIZATION,
+    const requireAuthorizationAction = {
+      type: ActionType.REQUIRE_AUTHORIZATION,
       payload: AuthorizationStatus.AUTH,
     };
 
-    expect(userData(state, requiredAuthorizationAction))
+    expect(userData(state, requireAuthorizationAction))
       .toEqual({authorizationStatus: AuthorizationStatus.AUTH});
   });
 
   it('should update authorizationStatus to by logout', () => {
     const state = {authorizationStatus: AuthorizationStatus.NO_AUTH};
-    const requiredAuthorizationAction = {
-      type: ActionType.REQUIRED_AUTHORIZATION,
+    const requireAuthorizationAction = {
+      type: ActionType.REQUIRE_AUTHORIZATION,
       payload: AuthorizationStatus.NO_AUTH,
     };
 
-    expect(userData(state, requiredAuthorizationAction))
+    expect(userData(state, requireAuthorizationAction))
       .toEqual({authorizationStatus: AuthorizationStatus.NO_AUTH});
   });
 
@@ -44,9 +44,9 @@ describe('Reducer: userData', () => {
     };
 
     expect(userData(state, setUserDataAction))
-    .toEqual({
-      authorizationStatus: AuthorizationStatus.AUTH,
-      userData: userData,
-    });
+      .toEqual({
+        authorizationStatus: AuthorizationStatus.AUTH,
+        userData: userData,
+      });
   });
 });

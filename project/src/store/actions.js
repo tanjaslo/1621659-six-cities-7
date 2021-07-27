@@ -12,10 +12,9 @@ export const ActionType = {
   CHANGE_CITY: 'ui/changeCity',
   CHANGE_SORT_TYPE: 'ui/changeSortType',
   REDIRECT_TO_ROUTE: 'ui/redirectToRoute',
-  SET_FAVORITES: 'ui/setFavorites',
   SET_USER_DATA: 'user/setUserData',
   LOGOUT: 'user/logout',
-  REQUIRED_AUTHORIZATION: 'user/requireAuthorization',
+  REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
 };
 
 export const loadOffers = createAction(ActionType.LOAD_OFFERS, (offers) => ({
@@ -64,7 +63,7 @@ export const setUserData = createAction(ActionType.SET_USER_DATA, (userData) => 
 
 export const logout = createAction(ActionType.LOGOUT);
 
-export const requireAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({
+export const requireAuthorization = createAction(ActionType.REQUIRE_AUTHORIZATION, (status) => ({
   payload: status,
 }));
 

@@ -1,15 +1,29 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
-import Header from '../../header/header';
-import MainEmpty from '../../main-empty/main-empty';
+import React, { useEffect } from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import CitiesList from '../../cities-list/cities-list';
+import CitiesPlaces from '../../cities-places/cities-places';
+import Header from '../../header/header';
+import LoadingScreen from '../../loading-screen/loading-screen';
+import MainEmpty from '../../main-empty/main-empty';
 import {getActiveCity} from '../../../store/ui/selectors';
 import {getCurrentOffers} from '../../../store/data/selectors';
-import CitiesPlaces from '../../cities-places/cities-places';
+import {fetchOffers} from '../../../store/api-actions';
+import {getDataLoadingStatus} from '../../../store/data/selectors';
 
 function MainPage(){
+  const dispatch = useDispatch();
+  const isDataLoaded = useSelector(getDataLoadingStatus);
+
   const currentOffers = useSelector(getCurrentOffers);
   const activeCity = useSelector(getActiveCity);
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
+
+  if (!isDataLoaded) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="page page--gray page--main">
