@@ -116,7 +116,7 @@ function Property({offer, offersNearby}) {
           <Map
             city={city}
             offers={[offer, ...offersNearby]}
-            activeCard={offer}
+            activeCardId={id}
           />
         </section>
       </section>

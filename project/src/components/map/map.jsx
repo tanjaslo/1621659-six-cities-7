@@ -17,7 +17,7 @@ const activeIcon = L.icon({
   iconAnchor: [15, 30],
 });
 
-function Map({city, offers, activeCard}) {
+function Map({city, offers, activeCardId}) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -33,12 +33,13 @@ function Map({city, offers, activeCard}) {
           },
           {
             icon:
-            (id === activeCard.id)
+            (id === activeCardId)
               ? activeIcon
               : defaultIcon,
           },
         );
         layerGroup.addLayer(marker);
+        //marker.addTo(layerGroup);
       });
 
       layerGroup.addTo(map);
@@ -54,13 +55,13 @@ function Map({city, offers, activeCard}) {
         layerGroup.remove();
       }
     };
-  }, [map, offers, activeCard]);
+  }, [map, offers, activeCardId]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 }
 
 Map.propTypes = {
-  activeCard: PropTypes.object.isRequired,
+  activeCardId: PropTypes.number.isRequired,
   city: PropTypes.shape({
     location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,

@@ -13,14 +13,13 @@ function CitiesPlaces({currentOffers}) {
   const activeCity = useSelector(getActiveCity);
   const sortedOffers = getSortedOffers(activeSortType, currentOffers);
 
-  const [activeCard, setActiveCard] = useState({});
+  const [activeCardId, setActiveCardId] = useState(0);
 
-  const handleOnMouseEnter = (id) => {
-    const currentCard = currentOffers.find((offer) => offer.id === Number(id));
-    setActiveCard(currentCard);
+  const handleOnMouseEnter = (currentId) => {
+    setActiveCardId(currentId);
   };
   const handleOnMouseLeave = () => {
-    setActiveCard({});
+    setActiveCardId(0);
   };
 
   return (
@@ -43,7 +42,7 @@ function CitiesPlaces({currentOffers}) {
           <Map
             city={currentOffers[0].city}
             offers={currentOffers}
-            activeCard={activeCard}
+            activeCardId={activeCardId}
           />
         </section>
       </div>
