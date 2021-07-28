@@ -2,7 +2,7 @@ import React, {memo, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {getActiveSortType} from '../../store/ui/selectors';
 import {changeSortType} from '../../store/actions';
-import {SortTypes} from '../../const';
+import {SortType} from '../../const';
 import SortItem from '../sort-item/sort-item';
 
 function SortList() {
@@ -36,7 +36,7 @@ function SortList() {
       <ul className={`places__options places__options--custom
       ${isSortListOpen && 'places__options--opened'}`}
       >
-        {Object.values(SortTypes).map((sort) => (
+        {Object.values(SortType).map((sort) => (
           <SortItem
             key={sort}
             isActive={activeSortType === sort}

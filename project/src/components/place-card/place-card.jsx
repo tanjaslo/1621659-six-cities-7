@@ -4,7 +4,7 @@ import generatePath from 'react-router/modules/generatePath';
 import PropTypes from 'prop-types';
 import offerProp from '../../prop-types/offer.prop';
 import FavoritesButton from '../favorites-button/favorites-button';
-import {AppRoutes, Types} from '../../const';
+import {AppRoute, Type} from '../../const';
 import {getRating, uppercaseFirstLetter} from '../../utils';
 
 function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
@@ -25,7 +25,7 @@ function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
         </div>
       )}
       <div className={`${imgWrapperClassName} place-card__image-wrapper`}>
-        <Link to={{pathname: generatePath(AppRoutes.ROOM, {id})}}>
+        <Link to={{pathname: generatePath(AppRoute.ROOM, {id})}}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -42,7 +42,7 @@ function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
           </div>
           <FavoritesButton
             id={id}
-            buttonType={Types.CARD}
+            buttonType={Type.CARD}
             isFavorite={isFavorite}
           />
         </div>
@@ -53,7 +53,7 @@ function PlaceCard({cardType, offer, onMouseEnter, onMouseLeave}) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={{pathname: generatePath(AppRoutes.ROOM, {id})}}>
+          <Link to={{pathname: generatePath(AppRoute.ROOM, {id})}}>
             {title}
           </Link>
         </h2>

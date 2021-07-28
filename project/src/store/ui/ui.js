@@ -3,11 +3,11 @@ import {
   changeSortType
 } from '../actions';
 import {createReducer} from '@reduxjs/toolkit';
-import {DEFAULT_CITY, SortTypes} from '../../const';
+import {DEFAULT_CITY, SortType} from '../../const';
 
 const initialState = {
   activeCity: DEFAULT_CITY,
-  activeSortType: SortTypes.POPULAR,
+  activeSortType: SortType.POPULAR,
 };
 
 const ui = createReducer(initialState, (builder) => {

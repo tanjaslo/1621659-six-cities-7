@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import {AppRoutes, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import UserAuth from '../user-auth/user-auth';
 import UserNoAuth from '../user-no-auth/user-no-auth';
 import {getAuthorizationStatus} from '../../store/user-data/selectors';
@@ -16,8 +16,8 @@ function Header() {
           <div className="header__left">
             <NavLink
               className="header__logo-link"
-              to={AppRoutes.MAIN}
-              isActive={(match, {pathname}) => !match ? false : pathname === AppRoutes.MAIN}
+              to={AppRoute.MAIN}
+              isActive={(match, {pathname}) => !match ? false : pathname === AppRoute.MAIN}
               activeClassName="header__logo-link--active"
             >
               <img

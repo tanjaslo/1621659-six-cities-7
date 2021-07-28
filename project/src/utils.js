@@ -1,4 +1,4 @@
-import {SortTypes} from './const';
+import {SortType} from './const';
 
 const STARS_COUNT = 5;
 
@@ -7,13 +7,13 @@ export const getRating = (rating) =>
 
 export const getSortedOffers = (sortType, offers) => {
   switch (sortType) {
-    case SortTypes.PRICE_LOW:
+    case SortType.PRICE_LOW:
       return offers.slice().sort((a, b) => a.price - b.price);
-    case SortTypes.PRICE_HIGH:
+    case SortType.PRICE_HIGH:
       return offers.slice().sort((a, b) => b.price - a.price);
-    case SortTypes.TOP_RATED:
+    case SortType.TOP_RATED:
       return offers.slice().sort((a, b) => b.rating - a.rating);
-    case SortTypes.POPULAR:
+    case SortType.POPULAR:
     default:
       return offers;
   }

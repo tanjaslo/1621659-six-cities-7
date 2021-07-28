@@ -13,7 +13,7 @@ import {
   login,
   logout
 } from './api-actions';
-import {APIRoutes, AppRoutes, AuthorizationStatus} from '../const';
+import {APIRoute, AppRoute, AuthorizationStatus} from '../const';
 import {adaptReviewToClient,
   adaptOfferToClient,
   adaptUserToClient} from '../adapter/adapter';
@@ -107,7 +107,7 @@ describe('Async operations', () => {
     const checkAuthLoader = checkAuth();
 
     apiMock
-      .onGet(APIRoutes.LOGIN)
+      .onGet(APIRoute.LOGIN)
       .reply(200, userData);
 
     return checkAuthLoader(dispatch, () => {}, api)
@@ -132,7 +132,7 @@ describe('Async operations', () => {
     const offersLoader = fetchOffers();
 
     apiMock
-      .onGet(APIRoutes.OFFERS)
+      .onGet(APIRoute.OFFERS)
       .reply(200, [fakeOffer]);
 
     return offersLoader(dispatch, () => {}, api)
@@ -152,7 +152,7 @@ describe('Async operations', () => {
     const offersNearbyLoader = fetchOffersNearby(id);
 
     apiMock
-      .onGet(`${APIRoutes.OFFERS}/${id}${APIRoutes.OFFERS_NEARBY}`)
+      .onGet(`${APIRoute.OFFERS}/${id}${APIRoute.OFFERS_NEARBY}`)
       .reply(200, [fakeOffer]);
 
     return offersNearbyLoader(dispatch, () => {}, api)
@@ -173,7 +173,7 @@ describe('Async operations', () => {
     const reviewsLoader = fetchReviews(fakeId);
 
     apiMock
-      .onGet(`${APIRoutes.REVIEWS}/${fakeId}`)
+      .onGet(`${APIRoute.REVIEWS}/${fakeId}`)
       .reply(200, [fakeReview]);
 
     return reviewsLoader(dispatch, () => {}, api)
@@ -194,7 +194,7 @@ describe('Async operations', () => {
     const offerLoader = fetchOffer(id);
 
     apiMock
-      .onGet(`${APIRoutes.OFFERS}/${id}`)
+      .onGet(`${APIRoute.OFFERS}/${id}`)
       .reply(200, fakeOffer);
 
     return offerLoader(dispatch, () => {}, api)
@@ -224,7 +224,7 @@ describe('Async operations', () => {
     const favoritesLoader = fetchFavoritesOffers();
 
     apiMock
-      .onGet(APIRoutes.FAVORITES)
+      .onGet(APIRoute.FAVORITES)
       .reply(200, [fakeOffer]);
 
     return favoritesLoader(dispatch, () => {}, api)
@@ -255,7 +255,7 @@ describe('Async operations', () => {
     const reviewSender = postReview({id: id, comment: comment, rating: rating});
 
     apiMock
-      .onPost(`${APIRoutes.REVIEWS}/${id}`, {comment, rating})
+      .onPost(`${APIRoute.REVIEWS}/${id}`, {comment, rating})
       .reply(200, [fakeReview]);
 
     return reviewSender(dispatch, () => {}, api)
@@ -276,7 +276,7 @@ describe('Async operations', () => {
     const setFavoritesSender = setFavorites({id, status});
 
     apiMock
-      .onPost(`${APIRoutes.FAVORITES}/${id}/${status}`)
+      .onPost(`${APIRoute.FAVORITES}/${id}/${status}`)
       .reply(200, fakeOffer);
 
     return setFavoritesSender(dispatch, () => {}, api)
@@ -294,7 +294,7 @@ describe('Async operations', () => {
     const dispatch = jest.fn();
     const loginSender = login({login: fakeUser.email, password: 'qwerty' });
 
-    apiMock.onPost(APIRoutes.LOGIN).reply(200, userData);
+    apiMock.onPost(APIRoute.LOGIN).reply(200, userData);
 
     return loginSender(dispatch, () => {}, api)
       .then(() => {
@@ -312,7 +312,7 @@ describe('Async operations', () => {
 
         expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.REDIRECT_TO_ROUTE,
-          payload: AppRoutes.MAIN,
+          payload: AppRoute.MAIN,
         });
       });
   });
@@ -325,7 +325,7 @@ describe('Async operations', () => {
     Storage.prototype.removeItem = jest.fn();
 
     apiMock
-      .onDelete(APIRoutes.LOGOUT)
+      .onDelete(APIRoute.LOGOUT)
       .reply(204, [{fake: true}]);
 
     return userLogout(dispatch, jest.fn(() => {}), api)
@@ -337,7 +337,7 @@ describe('Async operations', () => {
 
         expect(dispatch).nthCalledWith(2, {
           type: ActionType.REDIRECT_TO_ROUTE,
-          payload: AppRoutes.MAIN,
+          payload: AppRoute.MAIN,
         });
 
         expect(Storage.prototype.removeItem).toBeCalledTimes(1);

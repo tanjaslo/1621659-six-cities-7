@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from '../../../store/api-actions';
-import {AppRoutes} from '../../../const';
+import {AppRoute} from '../../../const';
 import Header from '../../header/header';
 import {getActiveCity} from '../../../store/ui/selectors';
 
@@ -82,7 +82,7 @@ function LoginPage() {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to={AppRoutes.MAIN}>
+              <Link className="locations__item-link" to={AppRoute.MAIN}>
                 <span>{activeCity}</span>
               </Link>
             </div>

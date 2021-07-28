@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import offerProp from '../../prop-types/offer.prop';
 import PlaceCard from '../place-card/place-card.jsx';
-import {CardTypes, Types} from '../../const';
+import {CardType, Type} from '../../const';
 
 function PlacesList({offers, onMouseEnter, onMouseLeave, isMainPage = true}) {
   return (
@@ -15,7 +15,7 @@ function PlacesList({offers, onMouseEnter, onMouseLeave, isMainPage = true}) {
           isMainPage={isMainPage}
           key={offer.id}
           offer={offer}
-          cardType={CardTypes[`${isMainPage ? Types.MAIN_PAGE : Types.ROOM_PAGE}`]}
+          cardType={CardType[`${isMainPage ? Type.MAIN_PAGE : Type.ROOM_PAGE}`]}
           onMouseEnter={() => onMouseEnter(offer.id)}
           onMouseLeave={() => onMouseLeave(null)}
         />))}

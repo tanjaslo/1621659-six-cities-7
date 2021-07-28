@@ -1,6 +1,6 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import {AppRoutes, AuthorizationStatus} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../private-route/private-route';
 import MainPage from '../pages/main-page/main-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
@@ -11,22 +11,22 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 function App() {
   return (
     <Switch>
-      <Route exact path={AppRoutes.MAIN} component={MainPage} />
+      <Route exact path={AppRoute.MAIN} component={MainPage} />
       <PrivateRoute
-        exact path={AppRoutes.FAVORITES}
+        exact path={AppRoute.FAVORITES}
         status={AuthorizationStatus.AUTH}
-        redirect={AppRoutes.LOGIN}
+        redirect={AppRoute.LOGIN}
         render={() => <FavoritesPage />}
       />
-      <Route exact path={AppRoutes.LOGIN} component={LoginPage} />
+      <Route exact path={AppRoute.LOGIN} component={LoginPage} />
       <PrivateRoute
         exact
-        path={AppRoutes.LOGIN}
+        path={AppRoute.LOGIN}
         status={AuthorizationStatus.NO_AUTH}
-        redirect={AppRoutes.MAIN}
+        redirect={AppRoute.MAIN}
         render={() => <LoginPage />}
       />
-      <Route exact path={AppRoutes.ROOM} component={RoomPage} />
+      <Route exact path={AppRoute.ROOM} component={RoomPage} />
       <Route component={NotFoundPage} />
     </Switch>
   );

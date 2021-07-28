@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Ratings} from '../../const';
+import {Rating} from '../../const';
 
 function RatingList({rating, setRating}) {
   return (
     <div className="reviews__rating-form form__rating">
-      {Object.values(Ratings).map(({value, title}) => (
+      {Object.values(Rating).map(({value, title}) => (
         <React.Fragment key={title}>
           <input
             className="form__rating-input visually-hidden"

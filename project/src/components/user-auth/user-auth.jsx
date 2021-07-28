@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {AppRoutes} from '../../const';
+import {AppRoute} from '../../const';
 import {logout} from '../../store/api-actions';
 import {getUserData} from '../../store/user-data/selectors';
 
@@ -20,7 +20,7 @@ function UserAuth() {
       <li className="header__nav-item user">
         <Link
           className="header__nav-link header__nav-link--profile"
-          to={AppRoutes.FAVORITES}
+          to={AppRoute.FAVORITES}
         >
           <div className="header__avatar-wrapper user__avatar-wrapper">
             <img src={avatarUrl} alt={'user'} style={{borderRadius: '50%'}}/>
@@ -31,7 +31,7 @@ function UserAuth() {
       <li className="header__nav-item">
         <Link
           className="header__nav-link"
-          to={AppRoutes.MAIN}
+          to={AppRoute.MAIN}
         >
           <span
             className="header__signout"

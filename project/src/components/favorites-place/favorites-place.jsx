@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import offerProp from '../../prop-types/offer.prop';
 import {changeCity} from '../../store/actions';
 import PlaceCard from '../place-card/place-card';
-import {AppRoutes, CardTypes, Types} from '../../const';
+import {AppRoute, CardType, Type} from '../../const';
 
 function FavoritesPlace({favoritesOffers, favoritesCity}) {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ function FavoritesPlace({favoritesOffers, favoritesCity}) {
         <div className="locations__item">
           <Link
             className="locations__item-link"
-            to={AppRoutes.MAIN}
+            to={AppRoute.MAIN}
             onClick={handleCityClick}
           >
             <span>{favoritesCity}</span>
@@ -34,7 +34,7 @@ function FavoritesPlace({favoritesOffers, favoritesCity}) {
           <PlaceCard
             key={offer.id}
             offer={offer}
-            cardType={CardTypes[Types.FAVORITES_PAGE]}
+            cardType={CardType[Type.FAVORITES_PAGE]}
           />))}
       </div>
     </li>

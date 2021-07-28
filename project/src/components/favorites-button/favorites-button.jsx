@@ -2,11 +2,11 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import PropTypes from 'prop-types';
 import {setFavorites} from '../../store/api-actions';
-import {FavoritesButtonTypes} from '../../const';
+import {FavoritesButtonType} from '../../const';
 
 function FavoritesButton ({id, buttonType, isFavorite}) {
   const dispatch = useDispatch();
-  const {buttonClassName, imgWidth, imgHeight} = FavoritesButtonTypes[buttonType];
+  const {buttonClassName, imgWidth, imgHeight} = FavoritesButtonType[buttonType];
 
   const handleFavoriteClick = () => {
     dispatch(setFavorites({id: id, status: Number(!isFavorite)}));

@@ -7,7 +7,7 @@ import PlacesList from '../places-list/places-list';
 import Map from '../map/map';
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
-import {AuthorizationStatus, Types} from '../../const';
+import {AuthorizationStatus, Type} from '../../const';
 import {getRating, uppercaseFirstLetter} from '../../utils';
 import {getAuthorizationStatus} from '../../store/user-data/selectors';
 
@@ -45,7 +45,7 @@ function Property({offer, offersNearby}) {
               <h1 className="property__name">{title}</h1>
               <FavoritesButton
                 id={id}
-                buttonType={Types.ROOM_PAGE}
+                buttonType={Type.ROOM_PAGE}
                 isFavorite={isFavorite}
               />
             </div>

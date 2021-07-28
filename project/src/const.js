@@ -1,7 +1,7 @@
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 export const DEFAULT_CITY = CITIES[0];
 
-export const APIRoutes = {
+export const APIRoute = {
   OFFERS: '/hotels',
   REVIEWS: '/comments',
   LOGIN: '/login',
@@ -10,7 +10,7 @@ export const APIRoutes = {
   FAVORITES: '/favorite',
 };
 
-export const AppRoutes = {
+export const AppRoute = {
   FAVORITES: '/favorites',
   LOGIN: '/login',
   MAIN: '/',
@@ -24,7 +24,7 @@ export const AuthorizationStatus = {
   UNKNOWN: 'UNKNOWN',
 };
 
-export const CardTypes = {
+export const CardType = {
   MAIN_PAGE: {
     articleClassName: 'cities__place-card',
     imgWrapperClassName: 'cities__image-wrapper',
@@ -51,7 +51,7 @@ export const CardTypes = {
   },
 };
 
-export const FavoritesButtonTypes = {
+export const FavoritesButtonType = {
   CARD: {
     buttonClassName: 'place-card',
     imgWidth: '18',
@@ -64,7 +64,7 @@ export const FavoritesButtonTypes = {
   },
 };
 
-export const Types = {
+export const Type = {
   MAIN_PAGE: 'MAIN_PAGE',
   FAVORITES_PAGE: 'FAVORITES_PAGE',
   ROOM_PAGE: 'ROOM_PAGE',
@@ -72,7 +72,7 @@ export const Types = {
 };
 
 
-export const Ratings = {
+export const Rating = {
   PERFECT: {
     value: 5,
     title: 'perfect',
@@ -95,7 +95,7 @@ export const Ratings = {
   },
 };
 
-export const SortTypes = {
+export const SortType = {
   POPULAR: 'Popular',
   PRICE_LOW: 'Price: low to high',
   PRICE_HIGH: 'Price: high to low',
