@@ -12,6 +12,7 @@ export const getFavoritesOffers = (state) => state[NameSpace.DATA].favoritesOffe
 export const getDataLoadingStatus = (state) => state[NameSpace.DATA].isDataLoaded;
 export const getFavoritesLoadingStatus = (state) => state[NameSpace.DATA].areFavoritesLoaded;
 export const getOfferLoadingStatus = (state) => state[NameSpace.DATA].isOfferDataLoaded;
+export const getServerStatus = (state) => state[NameSpace.DATA].isServerAvailable;
 
 export const getCurrentOffers = createSelector(
   [getOffers, getActiveCity],

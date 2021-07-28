@@ -9,6 +9,7 @@ export const ActionType = {
   UPDATE_OFFER: 'data/updateOffer',
   SET_IS_OFFER_DATA_LOADED: 'data/setIsOfferDataLoaded',
   SET_ARE_FAVORITES_LOADED: 'data/setAreFavoritesLoaded',
+  SET_IS_SERVER_AVAILABLE: 'data/setIsServerAvailable',
   CHANGE_CITY: 'ui/changeCity',
   CHANGE_SORT_TYPE: 'ui/changeSortType',
   REDIRECT_TO_ROUTE: 'ui/redirectToRoute',
@@ -42,6 +43,10 @@ export const setFavoritesLoadingStatus = createAction(ActionType.SET_ARE_FAVORIT
 }));
 
 export const setOfferLoadingStatus = createAction(ActionType.SET_IS_OFFER_DATA_LOADED, (status) => ({
+  payload: status,
+}));
+
+export const setServerStatus = createAction(ActionType.SET_IS_SERVER_AVAILABLE, (status) => ({
   payload: status,
 }));
 

@@ -7,6 +7,7 @@ import {
   loadFavoritesOffers,
   setFavoritesLoadingStatus,
   setOfferLoadingStatus,
+  setServerStatus,
   updateOffer
 } from '../actions';
 import {updateFavoritesOffers, updateOfferIsFavorite, updateOffers} from '../../utils';
@@ -20,6 +21,7 @@ const initialState = {
   isDataLoaded: false,
   isOfferDataLoaded: false,
   areFavoritesLoaded: false,
+  isServerAvailable: true,
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -47,6 +49,9 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(setOfferLoadingStatus, (state, action) => {
       state.isOfferDataLoaded = action.payload;
+    })
+    .addCase(setServerStatus, (state, action) => {
+      state.isServerAvailable = action.payload;
     })
     .addCase(updateOffer, (state, action) => {
       state.currentOffer = updateOfferIsFavorite(state.currentOffer, action.payload);

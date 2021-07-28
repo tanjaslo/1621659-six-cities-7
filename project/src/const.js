@@ -95,6 +95,11 @@ export const Rating = {
   },
 };
 
+export const ErrorMessage = {
+  DEFAULT: 'Something went wrong.',
+  REVIEW_ERROR: 'Your review was not sent. Please try again.',
+};
+
 export const SortType = {
   POPULAR: 'Popular',
   PRICE_LOW: 'Price: low to high',

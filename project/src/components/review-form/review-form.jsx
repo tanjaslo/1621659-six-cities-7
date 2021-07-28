@@ -2,8 +2,10 @@ import React, {memo, useState} from 'react';
 import PropTypes from 'prop-types';
 import {useDispatch} from 'react-redux';
 import {postReview} from '../../store/api-actions';
+import Alert from '../alert/alert';
 import RatingList from '../rating-list/rating-list';
 import ReviewComment from '../review-comment/review-comment';
+import {ErrorMessage} from '../../const';
 
 const MIN_CHARS_COUNT = 50;
 const MAX_CHARS_COUNT = 300;
@@ -13,15 +15,22 @@ function ReviewForm({id}) {
 
   const [rating, setRating] = useState(null);
   const [comment, setComment] = useState('');
+  const [isReviewSendingFailed, setIsReviewSendingFailed] = useState(false);
 
   const isButtonDisabled = rating === null || comment.length < MIN_CHARS_COUNT
   || comment.length > MAX_CHARS_COUNT;
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    dispatch(postReview(({id: id, comment: comment, rating: rating})));
-    setRating(null);
-    setComment('');
+    setIsReviewSendingFailed(false);
+    dispatch(postReview(({id: id, comment: comment, rating: rating})))
+      .then(() => {
+        setRating(null);
+        setComment('');
+      })
+      .catch(() => {
+        setIsReviewSendingFailed(true);
+      });
   };
 
   return (
@@ -30,6 +39,7 @@ function ReviewForm({id}) {
       method="post"
       onSubmit={(evt) => onFormSubmit(evt)}
     >
+      {isReviewSendingFailed && <Alert message={ErrorMessage.REVIEW_ERROR} />}
       <label
         className="reviews__label form__label"
         htmlFor="review"
