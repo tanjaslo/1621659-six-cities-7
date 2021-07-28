@@ -18,14 +18,15 @@ function App() {
         redirect={AppRoute.LOGIN}
         render={() => <FavoritesPage />}
       />
-      <Route exact path={AppRoute.LOGIN} component={LoginPage} />
-      <PrivateRoute
-        exact
-        path={AppRoute.LOGIN}
-        status={AuthorizationStatus.NO_AUTH}
-        redirect={AppRoute.MAIN}
-        render={() => <LoginPage />}
-      />
+      <Route exact path={AppRoute.LOGIN}>
+        <PrivateRoute
+          exact path={AppRoute.LOGIN}
+          status={AuthorizationStatus.NO_AUTH}
+          redirect={AppRoute.MAIN}
+          render={() => <LoginPage />}
+        >
+        </PrivateRoute>
+      </Route>
       <Route exact path={AppRoute.ROOM} component={RoomPage} />
       <Route component={NotFoundPage} />
     </Switch>

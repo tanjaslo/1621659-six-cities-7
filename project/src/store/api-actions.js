@@ -67,12 +67,7 @@ export const logout = () =>
 export const postReview = ({id, comment, rating}) =>
   (dispatch, _getState, api) => (
     api.post(`${APIRoute.REVIEWS}/${id}`,
-      {comment, rating},
-      {
-        headers: {
-          'x-token': localStorage.getItem('token'),
-        },
-      })
+      {comment, rating})
       .then(({data}) => dispatch(loadReviews(data.map(adaptReviewToClient))))
   );
 
