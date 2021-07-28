@@ -11,8 +11,6 @@ import {
 } from '../actions';
 import {updateFavoritesOffers, updateOfferIsFavorite, updateOffers} from '../../utils';
 
-export const REMOVE_FAVORITES_COUNT = 1;
-
 const initialState = {
   offers: [],
   currentOffer: {},
