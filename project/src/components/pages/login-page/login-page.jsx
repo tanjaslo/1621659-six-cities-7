@@ -12,6 +12,21 @@ function LoginPage() {
   const passwordRef = useRef();
   const activeCity = useSelector(getActiveCity);
 
+  const handleEmailChange = (evt) => {
+    const email = evt.target.value;
+    const reg = /.+@.+\..+/i;
+
+    !reg.test(email)
+      ? evt.target.setCustomValidity('Please provide correct email')
+      : evt.target.setCustomValidity('');
+  };
+
+  const handlePasswordChange = (evt) => {
+    evt.target.value.trim().length === 0
+      ? evt.target.setCustomValidity('Password cannot contain only spaces')
+      : evt.target.setCustomValidity('');
+  };
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     dispatch(login({
@@ -41,6 +56,7 @@ function LoginPage() {
                   name="email"
                   placeholder="Email"
                   ref={loginRef}
+                  onChange={handleEmailChange}
                   required
                 />
               </div>
@@ -52,6 +68,7 @@ function LoginPage() {
                   name="password"
                   placeholder="Password"
                   ref={passwordRef}
+                  onChange={handlePasswordChange}
                   required
                 />
               </div>
