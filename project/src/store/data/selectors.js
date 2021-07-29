@@ -1,8 +1,7 @@
 import {NameSpace} from '../root-reducer';
 import {createSelector} from 'reselect';
 import {getActiveCity} from '../ui/selectors';
-
-const MAX_REVIEWS_COUNT = 5;
+import {MAX_REVIEWS_COUNT} from '../../const';
 
 export const getOffers = (state) => state[NameSpace.DATA].offers;
 export const getCurrentOffer = (state) => state[NameSpace.DATA].currentOffer;

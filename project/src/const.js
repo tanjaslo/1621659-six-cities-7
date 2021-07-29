@@ -1,5 +1,6 @@
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 export const DEFAULT_CITY = CITIES[0];
+export const MAX_REVIEWS_COUNT = 10;
 
 export const APIRoute = {
   OFFERS: '/hotels',
