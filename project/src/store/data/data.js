@@ -5,6 +5,7 @@ import {
   loadReviews,
   loadOffersNearby,
   loadFavoritesOffers,
+  setDataLoadingStatus,
   setFavoritesLoadingStatus,
   setOfferLoadingStatus,
   setServerStatus,
@@ -21,7 +22,7 @@ const initialState = {
   isDataLoaded: false,
   isOfferDataLoaded: false,
   areFavoritesLoaded: false,
-  isServerAvailable: true,
+  isServerAvailable: false,
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -43,6 +44,9 @@ const data = createReducer(initialState, (builder) => {
     .addCase(loadFavoritesOffers, (state, action) => {
       state.favoritesOffers = action.payload;
       state.areFavoritesLoaded = true;
+    })
+    .addCase(setDataLoadingStatus, (state, action) => {
+      state.isDataLoaded = action.payload;
     })
     .addCase(setFavoritesLoadingStatus, (state, action) => {
       state.areFavoritesLoaded = action.payload;

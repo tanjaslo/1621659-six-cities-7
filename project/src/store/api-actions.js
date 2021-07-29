@@ -9,16 +9,29 @@ import {loadOffers,
   setOfferLoadingStatus,
   setUserData,
   updateOffer,
-  setFavoritesLoadingStatus} from './actions';
+  setDataLoadingStatus,
+  setFavoritesLoadingStatus,
+  setServerStatus} from './actions';
 import {AuthorizationStatus, APIRoute, AppRoute} from '../const';
 import {adaptOfferToClient,
   adaptReviewToClient,
   adaptUserToClient} from '../adapter/adapter';
 
-export const fetchOffers = () => (dispatch, _getState, api) => (
-  api.get(APIRoute.OFFERS)
-    .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient))))
-);
+export const fetchOffers = () =>
+  (dispatch, _getState, api) => {
+    dispatch(setServerStatus(false));
+    dispatch(setDataLoadingStatus(false));
+    return api.get(APIRoute.OFFERS)
+      .then(({data}) => dispatch(loadOffers(data.map(adaptOfferToClient))))
+      .then(() => {
+        dispatch(setServerStatus(true));
+        dispatch(setDataLoadingStatus(true));
+      })
+      .catch(() => {
+        dispatch(loadOffers([]));
+        dispatch(setServerStatus(false));
+      });
+  };
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => {
   dispatch(setOfferLoadingStatus(false));

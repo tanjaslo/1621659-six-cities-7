@@ -7,6 +7,7 @@ export const ActionType = {
   LOAD_OFFERS_NEARBY: 'data/loadOffersNearby',
   LOAD_FAVORITES_OFFERS: 'data/loadFavoritesOffers',
   UPDATE_OFFER: 'data/updateOffer',
+  SET_IS_DATA_LOADED: 'data/setIsDataLoaded',
   SET_IS_OFFER_DATA_LOADED: 'data/setIsOfferDataLoaded',
   SET_ARE_FAVORITES_LOADED: 'data/setAreFavoritesLoaded',
   SET_IS_SERVER_AVAILABLE: 'data/setIsServerAvailable',
@@ -36,6 +37,10 @@ export const loadOffersNearby = createAction(ActionType.LOAD_OFFERS_NEARBY, (off
 
 export const loadFavoritesOffers = createAction(ActionType.LOAD_FAVORITES_OFFERS, (favoritesOffers) => ({
   payload: favoritesOffers,
+}));
+
+export const setDataLoadingStatus = createAction(ActionType.SET_IS_DATA_LOADED, (status) => ({
+  payload: status,
 }));
 
 export const setFavoritesLoadingStatus = createAction(ActionType.SET_ARE_FAVORITES_LOADED, (status) => ({

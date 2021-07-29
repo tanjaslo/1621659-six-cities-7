@@ -98,6 +98,7 @@ export const Rating = {
 
 export const ErrorMessage = {
   DEFAULT: 'Something went wrong.',
+  OFFLINE: 'The internet connection appears to be offline.',
   REVIEW_ERROR: 'Your review was not sent. Please try again.',
 };
 
