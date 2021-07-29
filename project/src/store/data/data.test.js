@@ -101,6 +101,7 @@ describe('Reducer: data', () => {
         isDataLoaded: false,
         isOfferDataLoaded: false,
         areFavoritesLoaded: false,
+        isServerAvailable: false,
       });
   });
 
@@ -114,6 +115,7 @@ describe('Reducer: data', () => {
       isDataLoaded: false,
       isOfferDataLoaded: false,
       areFavoritesLoaded: false,
+      isServerAvailable: false,
     };
     const loadOffersAction = {
       type: ActionType.LOAD_OFFERS,
@@ -129,6 +131,7 @@ describe('Reducer: data', () => {
         isDataLoaded: true,
         isOfferDataLoaded: false,
         areFavoritesLoaded: false,
+        isServerAvailable: false,
       });
   });
 
@@ -142,6 +145,7 @@ describe('Reducer: data', () => {
       isDataLoaded: false,
       isOfferDataLoaded: false,
       areFavoritesLoaded: false,
+      isServerAvailable: false,
     };
     const loadReviewsAction = {
       type: ActionType.LOAD_REVIEWS,
@@ -157,6 +161,7 @@ describe('Reducer: data', () => {
         isDataLoaded: false,
         isOfferDataLoaded: false,
         areFavoritesLoaded: false,
+        isServerAvailable: false,
       });
   });
 
@@ -170,6 +175,7 @@ describe('Reducer: data', () => {
       isDataLoaded: false,
       isOfferDataLoaded: false,
       areFavoritesLoaded: false,
+      isServerAvailable: false,
     };
     const loadOffersNearbyAction = {
       type: ActionType.LOAD_OFFERS_NEARBY,
@@ -186,6 +192,7 @@ describe('Reducer: data', () => {
         isDataLoaded: false,
         isOfferDataLoaded: false,
         areFavoritesLoaded: false,
+        isServerAvailable: false,
       });
   });
 
@@ -199,6 +206,7 @@ describe('Reducer: data', () => {
       isDataLoaded: false,
       isOfferDataLoaded: false,
       areFavoritesLoaded: false,
+      isServerAvailable: true,
     };
     const loadOfferAction = {
       type: ActionType.LOAD_OFFER,
@@ -215,6 +223,7 @@ describe('Reducer: data', () => {
         isDataLoaded: false,
         isOfferDataLoaded: true,
         areFavoritesLoaded: false,
+        isServerAvailable: true,
       });
   });
 
@@ -228,6 +237,7 @@ describe('Reducer: data', () => {
       isDataLoaded: false,
       isOfferDataLoaded: false,
       areFavoritesLoaded: false,
+      isServerAvailable: false,
     };
     const setOfferLoadingStatus = {
       type: ActionType.SET_IS_OFFER_DATA_LOADED,
@@ -244,6 +254,7 @@ describe('Reducer: data', () => {
         isDataLoaded: false,
         isOfferDataLoaded: true,
         areFavoritesLoaded: false,
+        isServerAvailable: false,
       });
   });
 
@@ -257,6 +268,7 @@ describe('Reducer: data', () => {
       isDataLoaded: false,
       isOfferDataLoaded: false,
       areFavoritesLoaded: false,
+      isServerAvailable: false,
     };
     const setAreFavoriteOffersLoadedAction = {
       type: ActionType.SET_ARE_FAVORITES_LOADED,
@@ -273,6 +285,7 @@ describe('Reducer: data', () => {
         isDataLoaded: false,
         isOfferDataLoaded: false,
         areFavoritesLoaded: true,
+        isServerAvailable: false,
       });
   });
 
@@ -286,6 +299,7 @@ describe('Reducer: data', () => {
       isDataLoaded: true,
       isOfferDataLoaded: true,
       areFavoritesLoaded: true,
+      isServerAvailable: true,
     };
     const updatedOffers = [
       {
@@ -351,6 +365,7 @@ describe('Reducer: data', () => {
         isDataLoaded: true,
         isOfferDataLoaded: true,
         areFavoritesLoaded: true,
+        isServerAvailable: true,
       });
   });
 });

@@ -137,10 +137,30 @@ describe('Async operations', () => {
 
     return offersLoader(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatch).toHaveBeenCalledTimes(5);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.SET_IS_SERVER_AVAILABLE,
+          payload: false,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.SET_IS_DATA_LOADED,
+          payload: false,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.LOAD_OFFERS,
           payload: [adaptOfferToClient(fakeOffer)],
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(4, {
+          type: ActionType.SET_IS_SERVER_AVAILABLE,
+          payload: true,
+        });
+
+        expect(dispatch).toHaveBeenNthCalledWith(5, {
+          type: ActionType.SET_IS_DATA_LOADED,
+          payload: true,
         });
       });
   });
