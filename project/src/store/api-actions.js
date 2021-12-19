@@ -53,10 +53,9 @@ export const fetchOffersNearby = (id) => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(({data}) => dispatch(setUserData(adaptUserToClient(data))))
+    .then((data) => dispatch(setUserData(adaptUserToClient(data))))
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => {})
-);
+    .catch(() => dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH))));
 
 export const login = ({login: email, password}) =>
   (dispatch, _getState, api) => (
